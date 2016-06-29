@@ -13,7 +13,7 @@ namespace SharpMsi.Test
         static void Main(string[] args)
         {
 
-            var msiInstaller = MsiDatabase.Open(@"Setup MSGesman.msi", OpenDatabaseMode.Direct);
+            var msiInstaller = MsiDatabase.Open(@"blender-2.77a-windows64.msi", OpenDatabaseMode.Direct);
             try
             {
                 var test = msiInstaller.Query("select * from MyAss").First();

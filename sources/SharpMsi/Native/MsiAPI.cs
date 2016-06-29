@@ -41,7 +41,7 @@ namespace SharpMsi.Native
         [DllImport("msi.dll", ExactSpelling = true)]
         public static extern IntPtr MsiGetLastErrorRecord();
 
-        [DllImport("msi.dll", SetLastError = true, CharSet = CharSet.Unicode)]
+        [DllImport("msi.dll", CharSet = CharSet.Unicode)]
         public static extern uint MsiOpenDatabase(string szDatabasePath, IntPtr phPersist, out IntPtr phDatabase);
 
         [DllImport("msi.dll", ExactSpelling = true)]
@@ -89,15 +89,21 @@ namespace SharpMsi.Native
 
         public static Exception GetMsiResultException(MsiResult res)
         {
-            GetLastError();
-            return new Exception("Msi exception : " + Enum.GetName(typeof(MsiResult), res));
+            var msiError = GetLastError();
+
+            if(msiError == null)
+                return new Exception("Msi function failed with result : " + Enum.GetName(typeof(MsiResult), res));
+
+            return new MsiException(msiError.Code, msiError.FormatedMessage, res);
         }
 
-        public static void GetLastError()
+        private static MsiError _LastError = null;
+
+        public static MsiError GetLastError()
         {
             var errorRecordPtr = MsiGetLastErrorRecord();
             if (errorRecordPtr == IntPtr.Zero)
-                return;
+                return _LastError;
 
             MsiViewRecord errorRecord = null;
 
@@ -125,9 +131,11 @@ namespace SharpMsi.Native
 
                 for (int i = 2; i <= errorRecord.FieldCount; i++)
                     errorMessageArgs[i - 2] = errorRecord.GetString(i);
-
-                errorMessage = TryFormatErrorMessage(errorMessage, errorMessageArgs);
-
+                _LastError = new MsiError(
+                    errorCode, 
+                    errorMessage, 
+                    TryFormatErrorMessage(errorMessage, errorMessageArgs)
+                    );
             }
             finally
             {
@@ -135,7 +143,7 @@ namespace SharpMsi.Native
                 if (errorRecord != null)
                     errorRecord.Dispose();
             }
-            
+            return _LastError;
         }
 
         private static XDocument ErrorList;

@@ -53,11 +53,7 @@ namespace SharpMsi
         public void LoadProperties()
         {
             _Properties.Clear();
-            //using (var view = OpenView("SELECT * FROM `Property`"))
-            //{
-            //    foreach (var record in view.ExecuteQuery())
-            //        _Properties.Add(record.GetString(1), record.GetString(2));
-            //}
+
             foreach (var record in Query("SELECT * FROM Property"))
             {
                 _Properties.Add(record.GetString(1), record.GetString(2));
@@ -67,11 +63,7 @@ namespace SharpMsi
         private void GetTableList()
         {
             _Tables.Clear();
-            //using (var view = OpenView("SELECT * FROM `_Tables`"))
-            //{
-            //    foreach (var record in view.ExecuteQuery())
-            //        _Tables.Add(new MsiTable(this, record.GetString(1)));
-            //}
+
             foreach (var record in Query("SELECT * FROM _Tables"))
             {
                 _Tables.Add(new MsiTable(this, record.GetString(1)));
@@ -125,7 +117,6 @@ namespace SharpMsi
         }
 
         #endregion
-
 
         ~MsiDatabase()
         {

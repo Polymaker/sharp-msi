@@ -63,14 +63,82 @@ namespace SharpMsi
             return new MsiView(viewHandle, database, query);
         }
 
-        public IEnumerable<MsiViewRecord> ExecuteQuery()
+        public void Execute()
         {
             DisposeRecords();
-
             var res = (MsiResult)MsiAPI.MsiViewExecute(Handle, IntPtr.Zero);
             if (res != MsiResult.Success)
                 throw MsiAPI.GetMsiResultException(res);
+        }
 
+        public void Execute(params object[] parameters)
+        {
+            DisposeRecords();
+            MsiViewRecord inputRecord = null;
+            try
+            {
+                inputRecord = MsiViewRecord.Create(parameters.Length);
+                for (int i = 0; i < parameters.Length; i++)
+                    inputRecord.SetValue(i + 1, parameters[i]);
+
+                var res = (MsiResult)MsiAPI.MsiViewExecute(Handle, inputRecord.Handle);
+                if (res != MsiResult.Success)
+                    throw MsiAPI.GetMsiResultException(res);
+            }
+            finally
+            {
+                if (inputRecord != null)
+                    inputRecord.Dispose();
+            }
+        }
+
+        #region Execute Query
+
+
+        //private IEnumerable<MsiViewRecord> ExecuteQuery()
+        //{
+        //    DisposeRecords();
+
+        //    var res = (MsiResult)MsiAPI.MsiViewExecute(Handle, IntPtr.Zero);
+
+        //    if (paramPtr != IntPtr.Zero)
+        //        MsiAPI.MsiCloseHandle(paramPtr);
+
+        //    if (res != MsiResult.Success)
+        //        throw MsiAPI.GetMsiResultException(res);
+
+        //    while (res == MsiResult.Success)
+        //    {
+        //        IntPtr recordPtr = IntPtr.Zero;
+        //        res = (MsiResult)MsiAPI.MsiViewFetch(Handle, out recordPtr);
+
+        //        if (res == MsiResult.Success)
+        //        {
+        //            var recordObj = new MsiViewRecord(recordPtr);
+        //            _Records.Add(recordObj);
+        //            yield return recordObj;
+        //        }
+        //        else if (recordPtr != IntPtr.Zero)
+        //            MsiAPI.MsiCloseHandle(recordPtr);
+        //    }
+        //}
+
+
+        public IEnumerable<MsiViewRecord> ExecuteQuery()
+        {
+            Execute();
+            return FetchQuery();
+        }
+
+        public IEnumerable<MsiViewRecord> ExecuteQuery(params object[] parameters)
+        {
+            Execute(parameters);
+            return FetchQuery();
+        }
+
+        private IEnumerable<MsiViewRecord> FetchQuery()
+        {
+            var res = MsiResult.Success;
             while (res == MsiResult.Success)
             {
                 IntPtr recordPtr = IntPtr.Zero;
@@ -87,33 +155,7 @@ namespace SharpMsi
             }
         }
 
-        public void Execute()
-        {
-            var res = (MsiResult)MsiAPI.MsiViewExecute(Handle, IntPtr.Zero);
-            if (res != MsiResult.Success)
-                throw MsiAPI.GetMsiResultException(res);
-        }
-
-        public void Execute(params object[] parameters)
-        {
-            MsiViewRecord inputRecord = null;
-            try
-            {
-                inputRecord = MsiViewRecord.Create(parameters.Length);
-                for (int i = 0; i < parameters.Length; i++)
-                {
-                    inputRecord.SetValue(i + 1, parameters[i]);
-                }
-                var res = (MsiResult)MsiAPI.MsiViewExecute(Handle, inputRecord.Handle);
-                if (res != MsiResult.Success)
-                    throw MsiAPI.GetMsiResultException(res);
-            }
-            finally
-            {
-                //if (inputRecord != null)
-                //    inputRecord.Dispose();
-            }
-        }
+        #endregion
 
         #region Columns info
 

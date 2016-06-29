@@ -61,6 +61,7 @@
     <Compile Include="MsiColumnInfo.cs" />
     <Compile Include="MsiColumnType.cs" />
     <Compile Include="MsiDatabase.cs" />
+    <Compile Include="MsiError.cs" />
     <Compile Include="MsiException.cs" />
     <Compile Include="MsiObject.cs" />
     <Compile Include="MsiResult.cs" />
