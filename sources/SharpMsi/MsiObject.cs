@@ -6,7 +6,7 @@ using SharpMsi.Native;
 
 namespace SharpMsi
 {
-    public class MsiObject : IDisposable
+    public abstract class MsiObject : IDisposable
     {
         private IntPtr _Handle;
 
@@ -19,11 +19,6 @@ namespace SharpMsi
         public MsiObject(IntPtr handle)
         {
             _Handle = handle;
-        }
-
-        ~MsiObject()
-        {
-            Dispose();
         }
 
         public virtual void Dispose()
