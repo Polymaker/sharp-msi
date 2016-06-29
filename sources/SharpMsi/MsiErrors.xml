@@ -1,0 +1,547 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<MsiErrors>
+	<Error code="1101" message="Could not open file stream: {0}. System error: {1}" />
+	<Error code="1301" message="Cannot create the file '{0}'. A directory with this name already exists." />
+	<Error code="1302" message="Please insert the disk: {0}" />
+	<Error code="1303" message="The Installer has insufficient privileges to access this directory: {0}." />
+	<Error code="1304" message="Error writing to File: {0}" />
+	<Error code="1305" message="Error reading from File: {0}; System error code: {1}" />
+	<Error code="1306" message="The file '{0}' is in use. If you can, please close the application that is using the file, then click Retry." />
+	<Error code="1307" message="There is not enough disk space remaining to install this file: {0}. If you can, free up some disk space, and click Retry, or click Cancel to exit." />
+	<Error code="1308" message="Source file not found: {0}" />
+	<Error code="1309" message="Error attempting to open the source file: {1}. System error code: {0}" />
+	<Error code="1310" message="Error attempting to create the destination file: {1}. System error code: {0}" />
+	<Error code="1311" message="Could not locate source file cabinet: {0}." />
+	<Error code="1312" message="Cannot create the directory '{0}'. A file with this name already exists. Please rename or remove the file and click Retry, or click Cancel to exit." />
+	<Error code="1313" message="The volume {0} is currently unavailable. Please select another." />
+	<Error code="1314" message="The specified path '{0}' is unavailable." />
+	<Error code="1315" message="Unable to write to the specified folder: {0}." />
+	<Error code="1316" message="A network error occurred while attempting to read from the file: {0}" />
+	<Error code="1317" message="An error occurred while attempting to create the directory: {0}" />
+	<Error code="1318" message="A network error occurred while attempting to create the directory: {0}" />
+	<Error code="1319" message="A network error occurred while attempting to open the source file cabinet: {0}." />
+	<Error code="1320" message="The specified path is too long: '{0}'" />
+	<Error code="1321" message="The Installer has insufficient privileges to modify this file: {0}." />
+	<Error code="1322" message="A portion of the folder path '{0}' is invalid. It is either empty or exceeds the length allowed by the system." />
+	<Error code="1323" message="The folder path '{0}' contains words that are not valid in folder paths." />
+	<Error code="1324" message="The folder path '{0}' contains an invalid character." />
+	<Error code="1325" message="'{0}' is not a valid short file name." />
+	<Error code="1326" message="Error getting file security: {1} GetLastError: {0}" />
+	<Error code="1327" message="Invalid Drive: {0}" />
+	<Error code="1328" message="Error applying patch to file {0}. It has probably been updated by other means, and can no longer be modified by this patch. For more information, contact your patch vendor. System Error: {1}" />
+	<Error code="1329" message="A file that is required cannot be installed because the cabinet file {0} is not digitally signed. This may indicate that the cabinet file is corrupt." />
+	<Error code="1330" message="A file that is required cannot be installed because the cabinet file {0} has an invalid digital signature. This may indicate that the cabinet file is corrupt.{ Error {1} was returned by WinVerifyTrust.}" />
+	<Error code="1331" message="Failed to correctly copy {0} file: CRC error." />
+	<Error code="1332" message="Failed to correctly move {0} file: CRC error." />
+	<Error code="1333" message="Failed to correctly patch {0} file: CRC error." />
+	<Error code="1334" message="The file '{0}' cannot be installed because the file cannot be found in cabinet file '{1}'. This could indicate a network error, an error reading from the CD-ROM, or a problem with this package." />
+	<Error code="1335" message="The cabinet file '{0}' required for this installation is corrupt and cannot be used. This could indicate a network error, an error reading from the CD-ROM, or a problem with this package." />
+	<Error code="1336" message="There was an error creating a temporary file that is needed to complete this installation. Folder: {1}. System error code: {0}" />
+	<Error code="1401" message="Could not create key: {0}. System error {1}." />
+	<Error code="1402" message="Could not open key: {0}. System error {1}." />
+	<Error code="1403" message="Could not delete value {0} from key {1}. System error {2}." />
+	<Error code="1404" message="Could not delete key {0}. System error {1}." />
+	<Error code="1405" message="Could not read value {0} from key {1}. System error {2}." />
+	<Error code="1406" message="Could not write value {0} to key {1}. System error {2}." />
+	<Error code="1407" message="Could not get value names for key {0}. System error {1}." />
+	<Error code="1408" message="Could not get sub key names for key {0}. System error {1}." />
+	<Error code="1409" message="Could not read security information for key {0}. System error {1}." />
+	<Error code="1410" message="Could not increase the available registry space. {0} KB of free registry space is required for the installation of this application." />
+	<Error code="1500" message="Another installation is in progress. You must complete that installation before continuing this one." />
+	<Error code="1501" message="Error accessing secured data. Please make sure the Windows Installer is configured properly and try the install again." />
+	<Error code="1502" message="User '{0}' has previously initiated an install for product '{1}'. That user will need to run that install again before they can use that product. Your current install will now continue." />
+	<Error code="1503" message="User '{0}' has previously initiated an install for product '{1}'. That user will need to run that install again before they can use that product." />
+	<Error code="1601" message="Out of disk space -- Volume: '{0}'; required space: {1} KB; available space: {2} KB" />
+	<Error code="1602" message="Are you sure you want to cancel?" />
+	<Error code="1603" message="The file {0}{1} is being held in use by the following process: Name: {2}, Id: {3}, Window Title: '{4}'." />
+	<Error code="1604" message="The product '{0}' is already installed, and has prevented the installation of this product." />
+	<Error code="1605" message="Out of disk space -- Volume: '{0}'; required space: {1} KB; available space: {2} KB. If rollback is disabled, enough space is available. Click Cancel to quit, Retry to check available disk space again, or Ignore to continue without rollback." />
+	<Error code="1606" message="Could not access location {0}." />
+	<Error code="1607" message="The following applications should be closed before continuing the install:" />
+	<Error code="1608" message="Could not find any previously installed compliant products on the machine for installing this product" />
+	<Error code="1609" message="An error occurred while applying security settings. {0} is not a valid user or group. This could be a problem with the package, or a problem connecting to a domain controller on the network. Check your network connection and click Retry, or Cancel to end the install. Unable to locate the user's SID, system error {1}" />
+	<Error code="1610" message="The setup must update files or services that cannot be updated while the system is running. If you choose to continue, a reboot will be required to complete the setup." />
+	<Error code="1611" message="The setup was unable to automatically close all requested applications. Please ensure that the applications holding files in use are closed before continuing with the installation." />
+	<Error code="1651" message="Admin user failed to apply patch for a per-user managed or a per-machine application which is in advertise state." />
+	<Error code="1701" message="{0} is not a valid entry for a product ID." />
+	<Error code="1702" message="Configuring {0} cannot be completed until you restart your system. To restart now and resume configuration click Yes, or click No to stop this configuration." />
+	<Error code="1703" message="For the configuration changes made to {0} to take effect you must restart your system. To restart now click Yes, or click No if you plan to manually restart at a later time." />
+	<Error code="1704" message="An install for {0} is currently suspended. You must undo the changes made by that install to continue. Do you want to undo those changes?" />
+	<Error code="1705" message="A previous install for this product is in progress. You must undo the changes made by that install to continue. Do you want to undo those changes?" />
+	<Error code="1706" message="No valid source could be found for product {0}." />
+	<Error code="1707" message="Installation operation completed successfully." />
+	<Error code="1708" message="Installation operation failed." />
+	<Error code="1709" message="Product: {0} -- {1}" />
+	<Error code="1710" message="You may either restore your computer to its previous state or continue the install later. Would you like to restore?" />
+	<Error code="1711" message="An error occurred while writing installation information to disk. Check to make sure enough disk space is available, and click Retry, or Cancel to end the install." />
+	<Error code="1712" message="One or more of the files required to restore your computer to its previous state could not be found. Restoration will not be possible." />
+	<Error code="1713" message="{0} cannot install one of its required products. Contact your technical support group. System Error: {1}." />
+	<Error code="1714" message="The older version of {0} cannot be removed. Contact your technical support group. System Error {1}." />
+	<Error code="1715" message="Installed {0}." />
+	<Error code="1716" message="Configured {0}." />
+	<Error code="1717" message="Removed {0}." />
+	<Error code="1718" message="File {0} was rejected by digital signature policy." />
+	<Error code="1719" message="Windows Installer service could not be accessed. Contact your support personnel to verify that it is properly registered and enabled." />
+	<Error code="1720" message="There is a problem with this Windows Installer package. A script required for this install to complete could not be run. Contact your support personnel or package vendor. Custom action {0} script error {1}, {2}: {3} Line {4}, Column {5}, {6}" />
+	<Error code="1721" message="There is a problem with this Windows Installer package. A program required for this install to complete could not be run. Contact your support personnel or package vendor. Action: {0}, location: {1}, command: {2}" />
+	<Error code="1722" message="There is a problem with this Windows Installer package. A program run as part of the setup did not finish as expected. Contact your support personnel or package vendor. Action {0}, location: {1}, command: {2}" />
+	<Error code="1723" message="There is a problem with this Windows Installer package. A DLL required for this install to complete could not be run. Contact your support personnel or package vendor. Action {0}, entry: {1}, library: {2}" />
+	<Error code="1724" message="Removal completed successfully." />
+	<Error code="1725" message="Removal failed." />
+	<Error code="1726" message="Advertisement completed successfully." />
+	<Error code="1727" message="Advertisement failed." />
+	<Error code="1728" message="Configuration completed successfully." />
+	<Error code="1729" message="Configuration failed." />
+	<Error code="1730" message="You must be an Administrator to remove this application. To remove this application, you can log on as an administrator, or contact your technical support group for assistance." />
+	<Error code="1731" message="The source installation package for the product {0} is out of sync with the client package. Try the installation again using a valid copy of the installation package '{1}'." />
+	<Error code="1732" message="In order to complete the installation of {0}, you must restart the computer. Other users are currently logged on to this computer, and restarting may cause them to lose their work. Do you want to restart now?" />
+	<Error code="1801" message="The path {0} is not valid" />
+	<Error code="1802" message="Out of memory" />
+	<Error code="1803" message="There is no disk in drive {0}. Please, insert one and click Retry, or click Cancel to go back to the previously selected volume." />
+	<Error code="1804" message="There is no disk in drive {0}. Please, insert one and click Retry, or click Cancel to return to the browse dialog and select a different volume." />
+	<Error code="1805" message="The path {0} does not exist" />
+	<Error code="1806" message="You have insufficient privileges to read this folder." />
+	<Error code="1807" message="A valid destination folder for the install could not be determined." />
+	<Error code="1901" message="Error attempting to read from the source install database: {0}" />
+	<Error code="1902" message="Scheduling restart operation: Renaming file {0} to {1}. Must restart to complete operation." />
+	<Error code="1903" message="Scheduling restart operation: Deleting file {0}. Must restart to complete operation." />
+	<Error code="1904" message="Module {0} failed to register. HRESULT {1}." />
+	<Error code="1905" message="Module {0} failed to unregister. HRESULT {1}." />
+	<Error code="1906" message="Failed to cache package {0}. Error: {1}" />
+	<Error code="1907" message="Could not register font {0}. Verify that you have sufficient permissions to install fonts, and that the system supports this font." />
+	<Error code="1908" message="Could not unregister font {0}. Verify that you have sufficient permissions to remove fonts." />
+	<Error code="1909" message="Could not create shortcut {0}. Verify that the destination folder exists and that you can access it." />
+	<Error code="1910" message="Could not remove shortcut {0}. Verify that the shortcut file exists and that you can access it." />
+	<Error code="1911" message="Could not register type library for file {0}. Contact your support personnel." />
+	<Error code="1912" message="Could not unregister type library for file {0}. Contact your support personnel." />
+	<Error code="1913" message="Could not update the .ini file {0}{1}. Verify that the file exists and that you can access it." />
+	<Error code="1914" message="Could not schedule file {0} to replace file {1} on restart. Verify that you have write permissions to file {1}." />
+	<Error code="1915" message="Error removing ODBC driver manager, ODBC error {0}: {1}. Contact your support personnel." />
+	<Error code="1916" message="Error installing ODBC driver manager, ODBC error {0}: {1}. Contact your support personnel." />
+	<Error code="1917" message="Error removing ODBC driver: {2}, ODBC error {0}: {1}. Verify that you have sufficient privileges to remove ODBC drivers." />
+	<Error code="1918" message="Error installing ODBC driver: {2}, ODBC error {0}: {1}. Verify that the file {2} exists and that you can access it." />
+	<Error code="1919" message="Error configuring ODBC data source: {2}, ODBC error {0}: {1}. Verify that the file {2} exists and that you can access it." />
+	<Error code="1920" message="Service '{0}' ({1}) failed to start. Verify that you have sufficient privileges to start system services." />
+	<Error code="1921" message="Service '{0}' ({1}) could not be stopped. Verify that you have sufficient privileges to stop system services." />
+	<Error code="1922" message="Service '{0}' ({1}) could not be deleted. Verify that you have sufficient privileges to remove system services." />
+	<Error code="1923" message="Service '{0}' ({1}) could not be installed. Verify that you have sufficient privileges to install system services." />
+	<Error code="1924" message="Could not update environment variable '{0}'. Verify that you have sufficient privileges to modify environment variables." />
+	<Error code="1925" message="You do not have sufficient privileges to complete this installation for all users of the machine. Log on as administrator and then retry this installation." />
+	<Error code="1926" message="Could not set file security for file '{1}'. Error: {0}. Verify that you have sufficient privileges to modify the security permissions for this file." />
+	<Error code="1927" message="The installation requires COM+ Services to be installed." />
+	<Error code="1928" message="The installation failed to install the COM+ Application." />
+	<Error code="1929" message="The installation failed to remove the COM+ Application." />
+	<Error code="1930" message="The description for service '{0}' ({1}) could not be changed." />
+	<Error code="1931" message="The Windows Installer service cannot update the system file {0} because the file is protected by Windows. You may need to update your operating system for this program to work correctly. Package version: {1}, OS Protected version: {2}" />
+	<Error code="1932" message="The Windows Installer service cannot update the protected Windows file {0}. Package version: {1}, OS Protected version: {2}, SFP Error: {3}" />
+	<Error code="1933" message="The Windows Installer service cannot update one or more protected Windows files. SFP Error: {0}. List of protected files:\r\n{1}" />
+	<Error code="1934" message="User installations are disabled through policy on the machine." />
+	<Error code="1935" message="An error occurred during the installation of assembly component {0}. HRESULT: {1}. {{assembly interface: {2}, function: {3}, assembly name: {4}}}" />
+	<Error code="1935" message="An error occurred during the installation of assembly '{4}'. Please refer to Help and Support for more information. HRESULT: {1}. {{assembly interface: {2}, function: {3}, component: {0}}}" />
+	<Error code="1936" message="An error occurred during the installation of assembly '{4}'. The assembly is not strongly named or is not signed with the minimal key length. HRESULT: {1}. {{assembly interface: {2}, function: {3}, component: {0}}}" />
+	<Error code="1937" message="An error occurred during the installation of assembly '{4}'. The signature or catalog could not be verified or is not valid. HRESULT: {1}. {{assembly interface: {2}, function: {3}, component: {0}}}" />
+	<Error code="1938" message="An error occurred during the installation of assembly '{4}'. One or more modules of the assembly could not be found. HRESULT: {1}. {{assembly interface: {2}, function: {3}, component: {0}}}" />
+	<Error code="1939" message="Service '{0}' ({1}) could not be configured. This could be a problem with the package or your permissions. Verify that you have sufficient privileges to configure system services." />
+	<Error code="1940" message="Service '{0}' ({1}) could not be configured. Configuring services is supported only on Windows Vista/Server 2008 and above." />
+	<Error code="1941" message="Both LockPermissions and MsiLockPermissionsEx tables were found in the package. Only one of them should be present. This is a problem with the package." />
+	<Error code="1942" message="Multiple conditions ('{0}' and '{1}')have resolved to true while installing Object {2} (from table {3}). This may be a problem with the package." />
+	<Error code="1943" message="SDDL string '{0}' for object {1}(in table {2}) could not be resolved into a valid Security Descriptor." />
+	<Error code="1944" message="Could not set security for service '{1}'. Error: {0}. Verify that you have sufficient privileges to modify the security permissions for this service." />
+	<Error code="1945" message="You do not have sufficient privileges to complete the re-advertisement of this product. Re-advertisement requires initiation by a local system account calling the MsiAdvertiseScript API" />
+	<Error code="1946" message="Property '{0}' for shortcut '{1}' could not be set.{{ HRESULT {2}.}}" />
+	<Error code="2101" message="Shortcuts not supported by the operating system." />
+	<Error code="2102" message="Invalid .ini action: {0}" />
+	<Error code="2103" message="Could not resolve path for shell folder {0}." />
+	<Error code="2104" message="Writing .ini file: {1}: System error: {0}." />
+	<Error code="2105" message="Shortcut Creation {1} Failed. System error: {0}." />
+	<Error code="2106" message="Shortcut Deletion {1} Failed. System error: {0}." />
+	<Error code="2107" message="Error {1} registering type library {0}." />
+	<Error code="2108" message="Error {1} unregistering type library {0}." />
+	<Error code="2109" message="Section missing for .ini action." />
+	<Error code="2110" message="Key missing for .ini action." />
+	<Error code="2111" message="Detection of running applications failed, could not get performance data. Registered operation returned : {0}." />
+	<Error code="2112" message="Detection of running applications failed, could not get performance index. Registered operation returned : {0}." />
+	<Error code="2113" message="Detection of running applications failed." />
+	<Error code="2200" message="Database: {0}. Database object creation failed, mode = {1}." />
+	<Error code="2201" message="Database: {0}. Initialization failed, out of memory." />
+	<Error code="2202" message="Database: {0}. Data access failed, out of memory." />
+	<Error code="2203" message="Database: {0}. Cannot open database file. System error {1}." />
+	<Error code="2204" message="Database: {0}. Table already exists: {1}." />
+	<Error code="2205" message="Database: {0}. Table does not exist: {1}." />
+	<Error code="2206" message="Database: {0}. Table could not be dropped: {1}." />
+	<Error code="2207" message="Database: {0}. Intent violation." />
+	<Error code="2208" message="Database: {0}. Insufficient parameters for Execute." />
+	<Error code="2209" message="Database: {0}. Cursor in invalid state." />
+	<Error code="2210" message="Database: {0}. Invalid update data type in column {1}." />
+	<Error code="2211" message="Database: {0}. Could not create database table {1}." />
+	<Error code="2212" message="Database: {0}. Database not in writable state." />
+	<Error code="2213" message="Database: {0}. Error saving database tables." />
+	<Error code="2214" message="Database: {0}. Error writing export file: {1}." />
+	<Error code="2215" message="Database: {0}. Cannot open import file: {1}." />
+	<Error code="2216" message="Database: {0}. Import file format error: {1}, Line {2}." />
+	<Error code="2217" message="Database: {0}. Wrong state to CreateOutputDatabase {1}." />
+	<Error code="2218" message="Database: {0}. Table name not supplied." />
+	<Error code="2219" message="Database: {0}. Invalid Installer database format." />
+	<Error code="2220" message="Database: {0}. Invalid row/field data." />
+	<Error code="2221" message="Database: {0}. Code page conflict in import file: {1}." />
+	<Error code="2222" message="Database: {0}. Transform or merge code page {1} differs from database code page {2}." />
+	<Error code="2223" message="Database: {0}. Databases are the same. No transform generated." />
+	<Error code="2224" message="Database: {0}. GenerateTransform: Database corrupt. Table: {1}." />
+	<Error code="2225" message="Database: {0}. Transform: Cannot transform a temporary table. Table: {1}." />
+	<Error code="2226" message="Database: {0}. Transform failed." />
+	<Error code="2227" message="Database: {0}. Invalid identifier '{1}' in SQL query: {2}." />
+	<Error code="2228" message="Database: {0}. Unknown table '{1}' in SQL query: {2}." />
+	<Error code="2229" message="Database: {0}. Could not load table '{1}' in SQL query: {2}." />
+	<Error code="2230" message="Database: {0}. Repeated table '{1}' in SQL query: {2}." />
+	<Error code="2231" message="Database: {0}. Missing ')' in SQL query: {1}." />
+	<Error code="2232" message="Database: {0}. Unexpected token '{1}' in SQL query: {2}." />
+	<Error code="2233" message="Database: {0}. No columns in SELECT clause in SQL query: {1}." />
+	<Error code="2234" message="Database: {0}. No columns in ORDER BY clause in SQL query: {1}." />
+	<Error code="2235" message="Database: {0}. Column '{1}' not present or ambiguous in SQL query: {2}." />
+	<Error code="2236" message="Database: {0}. Invalid operator '{1}' in SQL query: {2}." />
+	<Error code="2237" message="Database: {0}. Invalid or missing query string: {1}." />
+	<Error code="2238" message="Database: {0}. Missing FROM clause in SQL query: {1}." />
+	<Error code="2239" message="Database: {0}. Insufficient values in INSERT SQL statement." />
+	<Error code="2240" message="Database: {0}. Missing update columns in UPDATE SQL statement." />
+	<Error code="2241" message="Database: {0}. Missing insert columns in INSERT SQL statement." />
+	<Error code="2242" message="Database: {0}. Column '{1}' repeated." />
+	<Error code="2243" message="Database: {0}. No primary columns defined for table creation." />
+	<Error code="2244" message="Database: {0}. Invalid type specifier '{1}' in SQL query {2}." />
+	<Error code="2245" message="IStorage::Stat failed with error {1}." />
+	<Error code="2246" message="Database: {0}. Invalid Installer transform format." />
+	<Error code="2247" message="Database: {0} Transform stream read/write failure." />
+	<Error code="2248" message="Database: {0} GenerateTransform/Merge: Column type in base table does not match reference table. Table: {1} Col #: {2}." />
+	<Error code="2249" message="Database: {0} GenerateTransform: More columns in base table than in reference table. Table: {1}." />
+	<Error code="2250" message="Database: {0} Transform: Cannot add existing row. Table: {1}." />
+	<Error code="2251" message="Database: {0} Transform: Cannot delete row that does not exist. Table: {1}." />
+	<Error code="2252" message="Database: {0} Transform: Cannot add existing table. Table: {1}." />
+	<Error code="2253" message="Database: {0} Transform: Cannot delete table that does not exist. Table: {1}." />
+	<Error code="2254" message="Database: {0} Transform: Cannot update row that does not exist. Table: {1}." />
+	<Error code="2255" message="Database: {0} Transform: Column with this name already exists. Table: {1} Col: {2}." />
+	<Error code="2256" message="Database: {0} GenerateTransform/Merge: Number of primary keys in base table does not match reference table. Table: {1}." />
+	<Error code="2257" message="Database: {0}. Intent to modify read only table: {1}." />
+	<Error code="2258" message="Database: {0}. Type mismatch in parameter: {1}." />
+	<Error code="2259" message="Database: {0} Table(s) Update failed" />
+	<Error code="2260" message="Storage CopyTo failed. System error: {1}." />
+	<Error code="2261" message="Could not remove stream {0}. System error: {1}." />
+	<Error code="2262" message="Stream does not exist: {0}. System error: {1}." />
+	<Error code="2263" message="Could not open stream {0}. System error: {1}." />
+	<Error code="2264" message="Could not remove stream {0}. System error: {1}." />
+	<Error code="2265" message="Could not commit storage. System error: {1}." />
+	<Error code="2266" message="Could not rollback storage. System error: {1}." />
+	<Error code="2267" message="Could not delete storage {0}. System error: {1}." />
+	<Error code="2268" message="Database: {0}. Merge: There were merge conflicts reported in {1} tables." />
+	<Error code="2269" message="Database: {0}. Merge: The column count differed in the '{1}' table of the two databases." />
+	<Error code="2270" message="Database: {0}. GenerateTransform/Merge: Column name in base table does not match reference table. Table: {1} Col #: {2}." />
+	<Error code="2271" message="SummaryInformation write for transform failed." />
+	<Error code="2272" message="Database: {0}. MergeDatabase will not write any changes because the database is open read-only." />
+	<Error code="2273" message="Database: {0}. MergeDatabase: A reference to the base database was passed as the reference database." />
+	<Error code="2274" message="Database: {0}. MergeDatabase: Unable to write errors to Error table. Could be due to a non-nullable column in a predefined Error table." />
+	<Error code="2275" message="Database: {0}. Specified Modify {1} operation invalid for table joins." />
+	<Error code="2276" message="Database: {0}. Code page {1} not supported by the system." />
+	<Error code="2277" message="Database: {0}. Failed to save table {1}." />
+	<Error code="2278" message="Database: {0}. Exceeded number of expressions limit of 32 in WHERE clause of SQL query: {1}." />
+	<Error code="2279" message="Database: {0} Transform: Too many columns in base table {1}." />
+	<Error code="2280" message="Database: {0}. Could not create column {1} for table {2}." />
+	<Error code="2281" message="Could not rename stream {0}. System error: {1}." />
+	<Error code="2282" message="Stream name invalid {0}." />
+	<Error code="2302" message="Patch notify: {0} bytes patched to far." />
+	<Error code="2303" message="Error getting volume info. GetLastError: {0}." />
+	<Error code="2304" message="Error getting disk free space. GetLastError: {0}. Volume: {1}." />
+	<Error code="2305" message="Error waiting for patch thread. GetLastError: {0}." />
+	<Error code="2306" message="Could not create thread for patch application. GetLastError: {0}." />
+	<Error code="2307" message="Source file key name is null." />
+	<Error code="2308" message="Destination file name is null." />
+	<Error code="2309" message="Attempting to patch file {0} when patch already in progress." />
+	<Error code="2310" message="Attempting to continue patch when no patch is in progress." />
+	<Error code="2315" message="Missing path separator: {0}." />
+	<Error code="2318" message="File does not exist: {0}." />
+	<Error code="2319" message="Error setting file attribute: {1} GetLastError: {0}." />
+	<Error code="2320" message="File not writable: {0}." />
+	<Error code="2321" message="Error creating file: {0}." />
+	<Error code="2322" message="User canceled." />
+	<Error code="2323" message="Invalid file attribute." />
+	<Error code="2324" message="Could not open file: {1} GetLastError: {0}." />
+	<Error code="2325" message="Could not get file time for file: {1} GetLastError: {0}." />
+	<Error code="2326" message="Error in FileToDosDateTime." />
+	<Error code="2327" message="Could not remove directory: {1} GetLastError: {0}." />
+	<Error code="2328" message="Error getting file version info for file: {0}." />
+	<Error code="2329" message="Error deleting file: {1}. GetLastError: {0}." />
+	<Error code="2330" message="Error getting file attributes: {1}. GetLastError: {0}." />
+	<Error code="2331" message="Error loading library {0} or finding entry point {1}." />
+	<Error code="2332" message="Error getting file attributes. GetLastError: {0}." />
+	<Error code="2333" message="Error setting file attributes. GetLastError: {0}." />
+	<Error code="2334" message="Error converting file time to local time for file: {1}. GetLastError: {0}." />
+	<Error code="2335" message="Path: {0} is not a parent of {1}." />
+	<Error code="2336" message="Error creating temp file on path: {1}. GetLastError: {0}." />
+	<Error code="2337" message="Could not close file: {1} GetLastError: {0}." />
+	<Error code="2338" message="Could not update resource for file: {1} GetLastError: {0}." />
+	<Error code="2339" message="Could not set file time for file: {1} GetLastError: {0}." />
+	<Error code="2340" message="Could not update resource for file: {1}, Missing resource." />
+	<Error code="2341" message="Could not update resource for file: {1}, Resource too large." />
+	<Error code="2342" message="Could not update resource for file: {1} GetLastError: {0}." />
+	<Error code="2343" message="Specified path is empty." />
+	<Error code="2344" message="Could not find required file IMAGEHLP.DLL to validate file:{0}." />
+	<Error code="2345" message="{0}: File does not contain a valid checksum value." />
+	<Error code="2347" message="User ignore." />
+	<Error code="2348" message="Error attempting to read from cabinet stream." />
+	<Error code="2349" message="Copy resumed with different info." />
+	<Error code="2350" message="FDI server error" />
+	<Error code="2351" message="File key '{0}' not found in cabinet '{1}'. The installation cannot continue." />
+	<Error code="2352" message="Could not initialize cabinet file server. The required file 'CABINET.DLL' may be missing." />
+	<Error code="2353" message="Not a cabinet." />
+	<Error code="2354" message="Cannot handle cabinet." />
+	<Error code="2355" message="Corrupt cabinet." />
+	<Error code="2356" message="Could not locate cabinet in stream: {0}." />
+	<Error code="2357" message="Cannot set attributes." />
+	<Error code="2358" message="Error determining whether file is in-use: {1}. GetLastError: {0}." />
+	<Error code="2359" message="Unable to create the target file - file may be in use." />
+	<Error code="2360" message="Progress tick." />
+	<Error code="2361" message="Need next cabinet." />
+	<Error code="2362" message="Folder not found: {0}." />
+	<Error code="2363" message="Could not enumerate subfolders for folder: {0}." />
+	<Error code="2364" message="Bad enumeration constant in CreateCopier call." />
+	<Error code="2365" message="Could not BindImage exe file {0}." />
+	<Error code="2366" message="User failure." />
+	<Error code="2367" message="User abort." />
+	<Error code="2368" message="Failed to get network resource information. Error {0}, network path {1}. Extended error: network provider {3}, error code {2}, error description {4}." />
+	<Error code="2370" message="Invalid CRC checksum value for {0} file.{ Its header says {1} for checksum, its computed value is {2}.}" />
+	<Error code="2371" message="Could not apply patch to file {0}. GetLastError: {1}." />
+	<Error code="2372" message="Patch file {0} is corrupt or of an invalid format. Attempting to patch file {1}. GetLastError: {2}." />
+	<Error code="2373" message="File {0} is not a valid patch file." />
+	<Error code="2374" message="File {0} is not a valid destination file for patch file {1}." />
+	<Error code="2375" message="Unknown patching error: {0}." />
+	<Error code="2376" message="Cabinet not found." />
+	<Error code="2379" message="Error opening file for read: {1} GetLastError: {0}." />
+	<Error code="2380" message="Error opening file for write: {1}. GetLastError: {0}." />
+	<Error code="2381" message="Directory does not exist: {0}." />
+	<Error code="2382" message="Drive not ready: {0}." />
+	<Error code="2401" message="64-bit registry operation attempted on 32-bit operating system for key {0}." />
+	<Error code="2402" message="Out of memory." />
+	<Error code="2501" message="Could not create rollback script enumerator." />
+	<Error code="2502" message="Called InstallFinalize when no install in progress." />
+	<Error code="2503" message="Called RunScript when not marked in progress." />
+	<Error code="2601" message="Invalid value for property {0}: '{1}'" />
+	<Error code="2602" message="The {0} table entry '{1}' has no associated entry in the Media table." />
+	<Error code="2603" message="Duplicate table name {0}." />
+	<Error code="2604" message="{0} Property undefined." />
+	<Error code="2605" message="Could not find server {0} in {1} or {2}." />
+	<Error code="2606" message="Value of property {0} is not a valid full path: '{1}'." />
+	<Error code="2607" message="Media table not found or empty (required for installation of files)." />
+	<Error code="2608" message="Could not create security descriptor for object. Error: '{0}'." />
+	<Error code="2609" message="Attempt to migrate product settings before initialization." />
+	<Error code="2611" message="The file {0} is marked as compressed, but the associated media entry does not specify a cabinet." />
+	<Error code="2612" message="Stream not found in '{0}' column. Primary key: '{1}'." />
+	<Error code="2613" message="RemoveExistingProducts action sequenced incorrectly." />
+	<Error code="2614" message="Could not access IStorage object from installation package." />
+	<Error code="2615" message="Skipped unregistration of Module {0} due to source resolution failure." />
+	<Error code="2616" message="Companion file {0} parent missing." />
+	<Error code="2617" message="Shared component {0} not found in Component table." />
+	<Error code="2618" message="Isolated application component {0} not found in Component table." />
+	<Error code="2619" message="Isolated components {0}, {1} not part of same feature." />
+	<Error code="2620" message="Key file of isolated application component {0} not in File table." />
+	<Error code="2621" message="Resource DLL or Resource ID information for shortcut {0} set incorrectly." />
+	<Error code="2701" message="The depth of a feature exceeds the acceptable tree depth of {0} levels." />
+	<Error code="2702" message="A Feature table record ({0}) references a non-existent parent in the Attributes field." />
+	<Error code="2703" message="Property name for root source path not defined: {0}" />
+	<Error code="2704" message="Root directory property undefined: {0}" />
+	<Error code="2705" message="Invalid table: {0}; Could not be linked as tree." />
+	<Error code="2706" message="Source paths not created. No path exists for entry {0} in Directory table." />
+	<Error code="2707" message="Target paths not created. No path exists for entry {0} in Directory table." />
+	<Error code="2708" message="No entries found in the file table." />
+	<Error code="2709" message="The specified Component name ('{0}') not found in Component table." />
+	<Error code="2710" message="The requested 'Select' state is illegal for this Component." />
+	<Error code="2711" message="The specified Feature name ('{0}') not found in Feature table." />
+	<Error code="2712" message="Invalid return from modeless dialog: {1}, in action {0}." />
+	<Error code="2713" message="Null value in a non-nullable column ('{0}') in '{1}' column of the '{2}' table." />
+	<Error code="2714" message="Invalid value for default folder name: {0}." />
+	<Error code="2715" message="The specified File key ('{0}') not found in the File table." />
+	<Error code="2716" message="Could not create a random subcomponent name for component '{0}'." />
+	<Error code="2717" message="Bad action condition or error calling custom action '{0}'." />
+	<Error code="2718" message="Missing package name for product code '{0}'." />
+	<Error code="2719" message="Neither UNC nor drive letter path found in source '{0}'." />
+	<Error code="2720" message="Error opening source list key. Error: '{0}'" />
+	<Error code="2721" message="Custom action {0} not found in Binary table stream." />
+	<Error code="2722" message="Custom action {0} not found in File table." />
+	<Error code="2723" message="Custom action {0} specifies unsupported type." />
+	<Error code="2724" message="The volume label '{0}' on the media you're running from does not match the label '{1}' given in the Media table. This is allowed only if you have only 1 entry in your Media table." />
+	<Error code="2725" message="Invalid database tables" />
+	<Error code="2726" message="Action not found: {0}." />
+	<Error code="2727" message="The directory entry '{0}' does not exist in the Directory table." />
+	<Error code="2728" message="Table definition error: {0}" />
+	<Error code="2729" message="Install engine not initialized." />
+	<Error code="2730" message="Bad value in database. Table: '{0}'; Primary key: '{1}'; Column: '{2}'" />
+	<Error code="2731" message="Selection Manager not initialized." />
+	<Error code="2732" message="Directory Manager not initialized." />
+	<Error code="2733" message="Bad foreign key ('{0}') in '{1}' column of the '{2}' table." />
+	<Error code="2734" message="Invalid reinstall mode character." />
+	<Error code="2735" message="Custom action '{0}' has caused an unhandled exception and has been stopped. This may be the result of an internal error in the custom action, such as an access violation." />
+	<Error code="2736" message="Generation of custom action temp file failed: {0}." />
+	<Error code="2737" message="Could not access custom action {0}, entry {1}, library {2}" />
+	<Error code="2738" message="Could not access VBScript run time for custom action {0}." />
+	<Error code="2739" message="Could not access JScript run time for custom action {0}." />
+	<Error code="2740" message="Custom action {0} script error {1}, {2}: {3} Line {4}, Column {5}, {6}." />
+	<Error code="2741" message="Configuration information for product {0} is corrupt. Invalid info: {0}." />
+	<Error code="2742" message="Marshaling to Server failed: {0}." />
+	<Error code="2743" message="Could not execute custom action {0}, location: {1}, command: {2}." />
+	<Error code="2744" message="EXE failed called by custom action {0}, location: {1}, command: {2}." />
+	<Error code="2745" message="Transform {0} invalid for package {1}. Expected language {2}, found language {3}." />
+	<Error code="2746" message="Transform {0} invalid for package {1}. Expected product {2}, found product {3}." />
+	<Error code="2747" message="Transform {0} invalid for package {1}. Expected product version &lt; {2}, found product version {3}." />
+	<Error code="2748" message="Transform {0} invalid for package {1}. Expected product version &lt;= {2}, found product version {3}." />
+	<Error code="2749" message="Transform {0} invalid for package {1}. Expected product version == {2}, found product version {3}." />
+	<Error code="2750" message="Transform {0} invalid for package {1}. Expected product version &gt;= {2}, found product version {3}." />
+	<Error code="2751" message="Transform {0} invalid for package {1}. Expected product version &gt; {2}, found product version {3}." />
+	<Error code="2752" message="Could not open transform {0} stored as child storage of package {2}." />
+	<Error code="2753" message="The File '{0}' is not marked for installation." />
+	<Error code="2754" message="The File '{0}' is not a valid patch file." />
+	<Error code="2755" message="Server returned unexpected error {0} attempting to install package {1}." />
+	<Error code="2756" message="The property '{0}' was used as a directory property in one or more tables, but no value was ever assigned." />
+	<Error code="2757" message="Could not create summary info for transform {0}." />
+	<Error code="2758" message="Transform {0} does not contain an MSI version." />
+	<Error code="2759" message="Transform {0} version {1} incompatible with engine; Min: {2}, Max: {3}." />
+	<Error code="2760" message="Transform {0} invalid for package {1}. Expected upgrade code {2}, found {3}." />
+	<Error code="2761" message="Cannot begin transaction. Global mutex not properly initialized." />
+	<Error code="2762" message="Cannot write script record. Transaction not started." />
+	<Error code="2763" message="Cannot run script. Transaction not started." />
+	<Error code="2765" message="Assembly name missing from AssemblyName table : Component: {2}." />
+	<Error code="2766" message="The file {0} is an invalid MSI storage file." />
+	<Error code="2767" message="No more data{ while enumerating {0}}." />
+	<Error code="2768" message="Transform in patch package is invalid." />
+	<Error code="2769" message="Custom Action {0} did not close {1} MSIHANDLEs." />
+	<Error code="2770" message="Cached folder {0} not defined in internal cache folder table." />
+	<Error code="2771" message="Upgrade of feature {0} has a missing component. ." />
+	<Error code="2772" message="New upgrade feature {0} must be a leaf feature." />
+	<Error code="2801" message="Unknown Message -- Type {0}. No action is taken." />
+	<Error code="2802" message="No publisher is found for the event {0}." />
+	<Error code="2803" message="Dialog View did not find a record for the dialog {0}." />
+	<Error code="2804" message="On activation of the control {1} on dialog {0} CMsiDialog failed to evaluate the condition {1}." />
+	<Error code="2806" message="The dialog {0} failed to evaluate the condition {1}." />
+	<Error code="2807" message="The action {0} is not recognized." />
+	<Error code="2808" message="Default button is ill-defined on dialog {0}." />
+	<Error code="2809" message="On the dialog {0} the next control pointers do not form a cycle. There is a pointer from {1} to {2}, but there is no further pointer." />
+	<Error code="2810" message="On the dialog {0} the next control pointers do not form a cycle. There is a pointer from both {1} and {3} to {2}." />
+	<Error code="2811" message="On dialog {0} control {1} has to take focus, but it is unable to do so." />
+	<Error code="2812" message="The event {0} is not recognized." />
+	<Error code="2813" message="The EndDialog event was called with the argument {0}, but the dialog has a parent" />
+	<Error code="2814" message="On the dialog {0} the control {1} names a nonexistent control {2} as the next control." />
+	<Error code="2815" message="ControlCondition table has a row without condition for the dialog {0}." />
+	<Error code="2816" message="The EventMapping table refers to an invalid control {2} on dialog {0} for the event {1}." />
+	<Error code="2817" message="The event {0} failed to set the attribute for the control {2} on dialog {1}." />
+	<Error code="2818" message="In the ControlEvent table EndDialog has an unrecognized argument {0}." />
+	<Error code="2819" message="Control {1} on dialog {0} needs a property linked to it." />
+	<Error code="2820" message="Attempted to initialize an already initialized handler." />
+	<Error code="2821" message="Attempted to initialize an already initialized dialog: {0}." />
+	<Error code="2822" message="No other method can be called on dialog {0} until all the controls are added." />
+	<Error code="2823" message="Attempted to initialize an already initialized control: {1} on dialog {0}." />
+	<Error code="2824" message="The dialog attribute {1} needs a record of at least {0} field(s)." />
+	<Error code="2825" message="The control attribute {1} needs a record of at least {0} field(s)." />
+	<Error code="2826" message="Control {1} on dialog {0} extends beyond the boundaries of the dialog {2} by {3} pixels." />
+	<Error code="2827" message="The button {2} on the radio button group {1} on dialog {0} extends beyond the boundaries of the group {3} by {4} pixels." />
+	<Error code="2828" message="Tried to remove control {1} from dialog {0}, but the control is not part of the dialog." />
+	<Error code="2829" message="Attempt to use an uninitialized dialog." />
+	<Error code="2830" message="Attempt to use an uninitialized control on dialog {0}." />
+	<Error code="2831" message="The control {1} on dialog {0} does not support {3} the attribute {2}." />
+	<Error code="2832" message="The dialog {0} does not support the attribute {1}." />
+	<Error code="2833" message="Control {2} on dialog {1} ignored the message {0}." />
+	<Error code="2834" message="The next pointers on the dialog {0} do not form a single loop." />
+	<Error code="2835" message="The control {0} was not found on dialog {1}." />
+	<Error code="2836" message="The control {1} on the dialog {0} cannot take focus." />
+	<Error code="2837" message="The control {1} on dialog {0} wants the winproc to return {2}." />
+	<Error code="2838" message="The item {0} in the selection table has itself as a parent." />
+	<Error code="2839" message="Setting the property {0} failed." />
+	<Error code="2840" message="Error dialog name mismatch." />
+	<Error code="2841" message="No OK button was found on the error dialog." />
+	<Error code="2842" message="No text field was found on the error dialog." />
+	<Error code="2843" message="The ErrorString attribute is not supported for standard dialogs." />
+	<Error code="2844" message="Cannot execute an error dialog if the Errorstring is not set." />
+	<Error code="2845" message="The total width of the buttons exceeds the size of the error dialog." />
+	<Error code="2846" message="SetFocus did not find the required control on the error dialog." />
+	<Error code="2847" message="The control {1} on dialog {0} has both the icon and the bitmap style set." />
+	<Error code="2848" message="Tried to set control {1} as the default button on dialog {0}, but the control does not exist." />
+	<Error code="2849" message="The control {1} on dialog {0} is of a type, that cannot be integer valued." />
+	<Error code="2850" message="Unrecognized volume type." />
+	<Error code="2851" message="The data for the icon {0} is not valid." />
+	<Error code="2852" message="At least one control has to be added to dialog {0} before it is used." />
+	<Error code="2853" message="Dialog {0} is a modeless dialog. The execute method should not be called on it." />
+	<Error code="2854" message="On the dialog {0} the control {1} is designated as first active control, but there is no such control." />
+	<Error code="2855" message="The radio button group {1} on dialog {0} has fewer than 2 buttons." />
+	<Error code="2856" message="Creating a second copy of the dialog {0}." />
+	<Error code="2857" message="The directory {0} is mentioned in the selection table but not found." />
+	<Error code="2858" message="The data for the bitmap {0} is not valid." />
+	<Error code="2859" message="Test error message." />
+	<Error code="2860" message="Cancel button is ill-defined on dialog {0}." />
+	<Error code="2861" message="The next pointers for the radio buttons on dialog {0} control {1} do not form a cycle." />
+	<Error code="2862" message="The attributes for the control {1} on dialog {0} do not define a valid icon size. Setting the size to 16." />
+	<Error code="2863" message="The control {1} on dialog {0} needs the icon {2} in size {3}x{3}, but that size is not available. Loading the first available size." />
+	<Error code="2864" message="The control {1} on dialog {0} received a browse event, but there is no configurable directory for the present selection. Likely cause: browse button is not authored correctly." />
+	<Error code="2865" message="Control {1} on billboard {0} extends beyond the boundaries of the billboard {2} by {3} pixels." />
+	<Error code="2866" message="The dialog {0} is not allowed to return the argument {1}." />
+	<Error code="2867" message="The error dialog property is not set." />
+	<Error code="2868" message="The error dialog {0} does not have the error style bit set." />
+	<Error code="2869" message="The dialog {0} has the error style bit set, but is not an error dialog." />
+	<Error code="2870" message="The help string {2} for control {1} on dialog {0} does not contain the separator character." />
+	<Error code="2871" message="The {0} table is out of date: {1}." />
+	<Error code="2872" message="The argument of the CheckPath control event on dialog {0} is invalid." />
+	<Error code="2873" message="On the dialog {0} the control {1} has an invalid string length limit: {2}." />
+	<Error code="2874" message="Changing the text font to {0} failed." />
+	<Error code="2875" message="Changing the text color to {0} failed." />
+	<Error code="2876" message="The control {1} on dialog {0} had to truncate the string: {2}." />
+	<Error code="2877" message="The binary data {0} was not found" />
+	<Error code="2878" message="On the dialog {0} the control {1} has a possible value: {2}. This is an invalid or duplicate value." />
+	<Error code="2879" message="The control {1} on dialog {0} cannot parse the mask string: {2}." />
+	<Error code="2880" message="Do not perform the remaining control events." />
+	<Error code="2881" message="CMsiHandler initialization failed." />
+	<Error code="2882" message="Dialog window class registration failed." />
+	<Error code="2883" message="CreateNewDialog failed for the dialog {0}." />
+	<Error code="2884" message="Failed to create a window for the dialog {0}." />
+	<Error code="2885" message="Failed to create the control {1} on the dialog {0}." />
+	<Error code="2886" message="Creating the {0} table failed." />
+	<Error code="2887" message="Creating a cursor to the {0} table failed." />
+	<Error code="2888" message="Executing the {0} view failed." />
+	<Error code="2889" message="Creating the window for the control {1} on dialog {0} failed." />
+	<Error code="2890" message="The handler failed in creating an initialized dialog." />
+	<Error code="2891" message="Failed to destroy window for dialog {0}." />
+	<Error code="2892" message="{0} is an integer only control, {1} is not a valid integer value." />
+	<Error code="2893" message="The control {1} on dialog {0} can accept property values that are at most {3} characters long. The value {2} exceeds this limit, and has been truncated." />
+	<Error code="2894" message="Loading RICHED20.DLL failed. GetLastError() returned: {0}." />
+	<Error code="2895" message="Freeing RICHED20.DLL failed. GetLastError() returned: {0}." />
+	<Error code="2896" message="Executing action {0} failed." />
+	<Error code="2897" message="Failed to create any {0} font on this system." />
+	<Error code="2898" message="For {0} textstyle, the system created a '{1}' font, in {2} character set." />
+	<Error code="2899" message="Failed to create {0} textstyle. GetLastError() returned: {1}." />
+	<Error code="2901" message="Invalid parameter to operation {0}: Parameter {1}." />
+	<Error code="2902" message="Operation {0} called out of sequence." />
+	<Error code="2903" message="The file {0} is missing." />
+	<Error code="2904" message="Could not BindImage file {0}." />
+	<Error code="2905" message="Could not read record from script file {0}." />
+	<Error code="2906" message="Missing header in script file {0}." />
+	<Error code="2907" message="Could not create secure security descriptor. Error: {0}." />
+	<Error code="2908" message="Could not register component {0}." />
+	<Error code="2909" message="Could not unregister component {0}." />
+	<Error code="2910" message="Could not determine user's security ID." />
+	<Error code="2911" message="Could not remove the folder {0}." />
+	<Error code="2912" message="Could not schedule file {0} for removal on restart." />
+	<Error code="2919" message="No cabinet specified for compressed file: {0}." />
+	<Error code="2920" message="Source directory not specified for file {0}." />
+	<Error code="2924" message="Script {0} version unsupported. Script version: {1}, minimum version: {2}, maximum version: {3}." />
+	<Error code="2927" message="ShellFolder id {0} is invalid." />
+	<Error code="2928" message="Exceeded maximum number of sources. Skipping source '{0}'." />
+	<Error code="2929" message="Could not determine publishing root. Error: {0}." />
+	<Error code="2932" message="Could not create file {0} from script data. Error: {1}." />
+	<Error code="2933" message="Could not initialize rollback script {0}." />
+	<Error code="2934" message="Could not secure transform {0}. Error {1}." />
+	<Error code="2935" message="Could not unsecure transform {0}. Error {1}." />
+	<Error code="2936" message="Could not find transform {0}." />
+	<Error code="2937" message="Windows Installer cannot install a system file protection catalog. Catalog: {0}, Error: {1}." />
+	<Error code="2938" message="Windows Installer cannot retrieve a system file protection catalog from the cache. Catalog: {0}, Error: {1}." />
+	<Error code="2939" message="Windows Installer cannot delete a system file protection catalog from the cache. Catalog: {0}, Error: {1}." />
+	<Error code="2940" message="Directory Manager not supplied for source resolution." />
+	<Error code="2941" message="Unable to compute the CRC for file {0}." />
+	<Error code="2942" message="BindImage action has not been executed on {0} file." />
+	<Error code="2943" message="This version of Windows does not support deploying 64-bit packages. The script {0} is for a 64-bit package." />
+	<Error code="2944" message="GetProductAssignmentType failed." />
+	<Error code="2945" message="Installation of ComPlus App {0} failed with error {1}." />
+	<Error code="3001" message="The patches in this list contain incorrect sequencing information: {0}{1}{2}{3}{4}{5}{6}{7}{8}{9}{10}{11}{12}{13}{14}." />
+	<Error code="3002" message="Patch {0} contains invalid sequencing information." />
+</MsiErrors>

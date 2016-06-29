@@ -145,9 +145,13 @@ namespace SharpMsi
             {
                 default:
                     throw new NotSupportedException("Value type.");
+                case "Byte":
                 case "Int16":
                 case "Int32":
                 case "Int64":
+                case "UInt16":
+                case "UInt32":
+                case "UInt64":
                     SetInteger(fieldIndex, Convert.ToInt32(value));
                     break;
                 case "Char":

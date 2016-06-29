@@ -53,29 +53,29 @@ namespace SharpMsi
         public void LoadProperties()
         {
             _Properties.Clear();
-            using (var view = OpenView("SELECT * FROM `Property`"))
-            {
-                foreach (var record in view.ExecuteQuery())
-                    _Properties.Add(record.GetString(1), record.GetString(2));
-            }
-            //foreach (var record in Query("SELECT * FROM Property"))
+            //using (var view = OpenView("SELECT * FROM `Property`"))
             //{
-            //    _Properties.Add(record.GetString(1), record.GetString(2));
+            //    foreach (var record in view.ExecuteQuery())
+            //        _Properties.Add(record.GetString(1), record.GetString(2));
             //}
+            foreach (var record in Query("SELECT * FROM Property"))
+            {
+                _Properties.Add(record.GetString(1), record.GetString(2));
+            }
         }
 
         private void GetTableList()
         {
             _Tables.Clear();
-            using (var view = OpenView("SELECT * FROM `_Tables`"))
-            {
-                foreach (var record in view.ExecuteQuery())
-                    _Tables.Add(new MsiTable(this, record.GetString(1)));
-            }
-            //foreach (var record in Query("SELECT * FROM _Tables"))
+            //using (var view = OpenView("SELECT * FROM `_Tables`"))
             //{
-            //    _Tables.Add(new MsiTable(this, record.GetString(1)));
+            //    foreach (var record in view.ExecuteQuery())
+            //        _Tables.Add(new MsiTable(this, record.GetString(1)));
             //}
+            foreach (var record in Query("SELECT * FROM _Tables"))
+            {
+                _Tables.Add(new MsiTable(this, record.GetString(1)));
+            }
         }
 
         public static MsiDatabase Open(string filepath, OpenDatabaseMode mode)
@@ -88,6 +88,14 @@ namespace SharpMsi
             return new MsiDatabase(msiHandle, filepath, mode);
         }
 
+        public bool Commit()
+        {
+            var res = (MsiResult)MsiAPI.MsiDatabaseCommit(Handle);
+            return res == MsiResult.Success;
+        }
+
+        #region Views & queries
+
         public MsiView OpenView(string query)
         {
             return MsiView.Open(this, query);
@@ -98,7 +106,6 @@ namespace SharpMsi
             var view = MsiView.Open(this, query);
             foreach (var record in view.ExecuteQuery())
                 yield return record;
-            //yield break;
         }
 
         public void ExecuteNonQuery(string query)
@@ -116,6 +123,9 @@ namespace SharpMsi
                 view.Execute(parameters);
             }
         }
+
+        #endregion
+
 
         ~MsiDatabase()
         {

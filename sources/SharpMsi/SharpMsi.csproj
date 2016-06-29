@@ -61,6 +61,7 @@
     <Compile Include="MsiColumnInfo.cs" />
     <Compile Include="MsiColumnType.cs" />
     <Compile Include="MsiDatabase.cs" />
+    <Compile Include="MsiException.cs" />
     <Compile Include="MsiObject.cs" />
     <Compile Include="MsiResult.cs" />
     <Compile Include="MsiTable.cs" />
@@ -73,6 +74,9 @@
     <Compile Include="Native\NativeUtils.cs" />
     <Compile Include="OpenDatabaseMode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="MsiErrors.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

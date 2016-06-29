@@ -12,8 +12,13 @@ namespace SharpMsi.Test
     {
         static void Main(string[] args)
         {
+
             var msiInstaller = MsiDatabase.Open(@"Setup MSGesman.msi", OpenDatabaseMode.Direct);
-            
+            try
+            {
+                var test = msiInstaller.Query("select * from MyAss").First();
+            }
+            catch { }
             //foreach (var table in msiInstaller.Tables)
             //{
             //    Trace.WriteLine(string.Format("Table '{0}' has {1} columns:", table.Name, table.Columns.Length));
@@ -26,5 +31,7 @@ namespace SharpMsi.Test
 
             msiInstaller.Dispose();
         }
+
+
     }
 }

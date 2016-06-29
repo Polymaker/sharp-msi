@@ -27,7 +27,6 @@ namespace SharpMsi
             get { return _Length; }
         }
 
-
         public bool Nullable
         {
             get { return _Nullable; }

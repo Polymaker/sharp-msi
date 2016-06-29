@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Xml.Linq;
 
 namespace SharpMsi.Native
 {
@@ -31,6 +34,12 @@ namespace SharpMsi.Native
 
         [DllImport("msi.dll", CharSet = CharSet.Auto, SetLastError = true)]
         public static extern UInt32 MsiEnumRelatedProducts(string strUpgradeCode, int reserved, int iIndex, StringBuilder sbProductCode);
+
+        [DllImport("msi.dll", CharSet = CharSet.Unicode)]
+        public static extern int MsiFormatRecord(IntPtr hInstall, IntPtr hRecord, [Out] StringBuilder szResultBuf, ref int pcchResultBuf);
+
+        [DllImport("msi.dll", ExactSpelling = true)]
+        public static extern IntPtr MsiGetLastErrorRecord();
 
         [DllImport("msi.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         public static extern uint MsiOpenDatabase(string szDatabasePath, IntPtr phPersist, out IntPtr phDatabase);
@@ -80,7 +89,83 @@ namespace SharpMsi.Native
 
         public static Exception GetMsiResultException(MsiResult res)
         {
+            GetLastError();
             return new Exception("Msi exception : " + Enum.GetName(typeof(MsiResult), res));
+        }
+
+        public static void GetLastError()
+        {
+            var errorRecordPtr = MsiGetLastErrorRecord();
+            if (errorRecordPtr == IntPtr.Zero)
+                return;
+
+            MsiViewRecord errorRecord = null;
+
+            try
+            {
+                //int textSize = 0;
+                //StringBuilder errorText = new StringBuilder();
+                //var res = (MsiResult)MsiFormatRecord(IntPtr.Zero, errorRecordPtr, errorText, ref textSize);
+                //if (res == MsiResult.MoreData)
+                //{
+                //    textSize++;// returned size does not include null terminator.
+                //    errorText = new StringBuilder(textSize);
+                //    res = (MsiResult)MsiFormatRecord(IntPtr.Zero, errorRecordPtr, errorText, ref textSize);
+                //    if (res == MsiResult.Success)
+                //    {
+
+                //    }
+                //}
+
+                errorRecord = new MsiViewRecord(errorRecordPtr);
+
+                var errorCode = errorRecord.GetInteger(1);
+                var errorMessage = GetErrorMessage(errorCode);
+                var errorMessageArgs = new string[errorRecord.FieldCount - 1];
+
+                for (int i = 2; i <= errorRecord.FieldCount; i++)
+                    errorMessageArgs[i - 2] = errorRecord.GetString(i);
+
+                errorMessage = TryFormatErrorMessage(errorMessage, errorMessageArgs);
+
+            }
+            finally
+            {
+                //MsiCloseHandle(errorRecordPtr);
+                if (errorRecord != null)
+                    errorRecord.Dispose();
+            }
+            
+        }
+
+        private static XDocument ErrorList;
+
+        private static string GetErrorMessage(int errorCode)
+        {
+            if (ErrorList == null)
+            {
+                var assembly = Assembly.GetExecutingAssembly();
+                using (var stream = assembly.GetManifestResourceStream("SharpMsi.MsiErrors.xml"))
+                    ErrorList = XDocument.Load(stream);
+            }
+            var errorElem = ErrorList.Descendants("Error").FirstOrDefault(e => e.Attribute("code").Value == errorCode.ToString());
+            if (errorElem != null)
+                return errorElem.Attribute("message").Value;
+            return string.Empty;
+        }
+
+        private static string TryFormatErrorMessage(string message, string[] messageArgs)
+        {
+            if (!(message.Contains("{") && messageArgs.Length > 0))
+                return message;
+            try
+            {
+                return string.Format(message, messageArgs);
+            }
+            catch
+            {
+                return message;
+            }
         }
     }
 }
