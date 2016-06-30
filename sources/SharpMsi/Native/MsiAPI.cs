@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
-using System.Xml.Linq;
 
 namespace SharpMsi.Native
 {
@@ -109,28 +106,15 @@ namespace SharpMsi.Native
 
             try
             {
-                //int textSize = 0;
-                //StringBuilder errorText = new StringBuilder();
-                //var res = (MsiResult)MsiFormatRecord(IntPtr.Zero, errorRecordPtr, errorText, ref textSize);
-                //if (res == MsiResult.MoreData)
-                //{
-                //    textSize++;// returned size does not include null terminator.
-                //    errorText = new StringBuilder(textSize);
-                //    res = (MsiResult)MsiFormatRecord(IntPtr.Zero, errorRecordPtr, errorText, ref textSize);
-                //    if (res == MsiResult.Success)
-                //    {
-
-                //    }
-                //}
-
                 errorRecord = new MsiRecord(errorRecordPtr);
 
                 var errorCode = errorRecord.GetInteger(1);
-                var errorMessage = GetErrorMessage(errorCode);
+                var errorMessage = MsiError.GetErrorMessage(errorCode);
                 var errorMessageArgs = new string[errorRecord.FieldCount - 1];
 
                 for (int i = 2; i <= errorRecord.FieldCount; i++)
                     errorMessageArgs[i - 2] = errorRecord.GetString(i);
+
                 _LastError = new MsiError(
                     errorCode, 
                     errorMessage, 
@@ -139,27 +123,10 @@ namespace SharpMsi.Native
             }
             finally
             {
-                //MsiCloseHandle(errorRecordPtr);
                 if (errorRecord != null)
                     errorRecord.Dispose();
             }
             return _LastError;
-        }
-
-        private static XDocument ErrorList;
-
-        private static string GetErrorMessage(int errorCode)
-        {
-            if (ErrorList == null)
-            {
-                var assembly = Assembly.GetExecutingAssembly();
-                using (var stream = assembly.GetManifestResourceStream("SharpMsi.MsiErrors.xml"))
-                    ErrorList = XDocument.Load(stream);
-            }
-            var errorElem = ErrorList.Descendants("Error").FirstOrDefault(e => e.Attribute("code").Value == errorCode.ToString());
-            if (errorElem != null)
-                return errorElem.Attribute("message").Value;
-            return string.Empty;
         }
 
         private static string TryFormatErrorMessage(string message, string[] messageArgs)

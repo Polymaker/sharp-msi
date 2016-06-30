@@ -7,10 +7,10 @@ namespace SharpMsi
 {
     public class MsiColumnInfo
     {
-        private string _Name;
-        private MsiColumnType _Type;
-        private int _Length;
-        private bool _Nullable;
+        private readonly string _Name;
+        private readonly MsiColumnType _Type;
+        private readonly int _Length;
+        private readonly bool _Nullable;
 
         public string Name
         {
@@ -78,6 +78,7 @@ namespace SharpMsi
         public string GetMsiDefinition()
         {
             string msiDef = string.Empty;
+
             switch (Type)
             {
                 case MsiColumnType.String:
@@ -93,10 +94,11 @@ namespace SharpMsi
                     msiDef = "v";
                     break;
             }
-            msiDef += Length;
+
             if (Nullable)
                 msiDef = msiDef.ToUpper();
-            return msiDef;
+
+            return msiDef + Length;
         }
 
         internal static MsiColumnInfo ParseColumnInfo(string name, string columnDescriptor)
@@ -123,7 +125,7 @@ namespace SharpMsi
                     colType = MsiColumnType.Object;
                     break;
                 default:
-                    throw new NotImplementedException();
+                    throw new NotImplementedException("Column type descriptor : " + typeStr);
             }
             return new ColTypeInfo()
             {

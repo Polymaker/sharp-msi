@@ -65,6 +65,8 @@ namespace SharpMsi
 
         public void Execute()
         {
+            if (IsDisposed)
+                throw new ObjectDisposedException("MsiView");
             DisposeRecords();
             var res = (MsiResult)MsiAPI.MsiViewExecute(Handle, IntPtr.Zero);
             if (res != MsiResult.Success)
@@ -73,6 +75,8 @@ namespace SharpMsi
 
         public void Execute(params object[] parameters)
         {
+            if (IsDisposed)
+                throw new ObjectDisposedException("MsiView");
             DisposeRecords();
             MsiRecord inputRecord = null;
             try
@@ -136,6 +140,7 @@ namespace SharpMsi
             {
                 namesInfo = GetColumnsInfo(MSICOLINFO.Names);
                 typesInfo = GetColumnsInfo(MSICOLINFO.Types);
+
                 _Columns = new MsiColumnInfo[namesInfo.FieldCount];
                 for (int i = 0; i < namesInfo.FieldCount; i++)
                 {

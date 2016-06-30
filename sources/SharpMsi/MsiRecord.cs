@@ -10,7 +10,7 @@ namespace SharpMsi
     public class MsiRecord : MsiObject
     {
         // Fields...
-        private int _FieldCount;
+        private readonly int _FieldCount;
 
         public int FieldCount
         {
