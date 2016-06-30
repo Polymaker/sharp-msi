@@ -11,7 +11,7 @@ namespace SharpMsi
     public class MsiView : MsiObject
     {
         // Fields...
-        private List<MsiViewRecord> _Records;
+        private List<MsiRecord> _Records;
         private readonly MsiDatabase _Database;
         private string _Query;
         private MsiColumnInfo[] _Columns;
@@ -40,7 +40,7 @@ namespace SharpMsi
             }
         }
 
-        public IList<MsiViewRecord> Records
+        public IList<MsiRecord> Records
         {
             get { return _Records.AsReadOnly(); }
         }
@@ -50,7 +50,7 @@ namespace SharpMsi
         {
             _Database = database;
             _Query = query;
-            _Records = new List<MsiViewRecord>();
+            _Records = new List<MsiRecord>();
             _Columns = new MsiColumnInfo[0];
         }
 
@@ -74,10 +74,10 @@ namespace SharpMsi
         public void Execute(params object[] parameters)
         {
             DisposeRecords();
-            MsiViewRecord inputRecord = null;
+            MsiRecord inputRecord = null;
             try
             {
-                inputRecord = MsiViewRecord.Create(parameters.Length);
+                inputRecord = MsiRecord.Create(parameters.Length);
                 for (int i = 0; i < parameters.Length; i++)
                     inputRecord.SetValue(i + 1, parameters[i]);
 
@@ -94,49 +94,19 @@ namespace SharpMsi
 
         #region Execute Query
 
-
-        //private IEnumerable<MsiViewRecord> ExecuteQuery()
-        //{
-        //    DisposeRecords();
-
-        //    var res = (MsiResult)MsiAPI.MsiViewExecute(Handle, IntPtr.Zero);
-
-        //    if (paramPtr != IntPtr.Zero)
-        //        MsiAPI.MsiCloseHandle(paramPtr);
-
-        //    if (res != MsiResult.Success)
-        //        throw MsiAPI.GetMsiResultException(res);
-
-        //    while (res == MsiResult.Success)
-        //    {
-        //        IntPtr recordPtr = IntPtr.Zero;
-        //        res = (MsiResult)MsiAPI.MsiViewFetch(Handle, out recordPtr);
-
-        //        if (res == MsiResult.Success)
-        //        {
-        //            var recordObj = new MsiViewRecord(recordPtr);
-        //            _Records.Add(recordObj);
-        //            yield return recordObj;
-        //        }
-        //        else if (recordPtr != IntPtr.Zero)
-        //            MsiAPI.MsiCloseHandle(recordPtr);
-        //    }
-        //}
-
-
-        public IEnumerable<MsiViewRecord> ExecuteQuery()
+        public IEnumerable<MsiRecord> ExecuteQuery()
         {
             Execute();
             return FetchQuery();
         }
 
-        public IEnumerable<MsiViewRecord> ExecuteQuery(params object[] parameters)
+        public IEnumerable<MsiRecord> ExecuteQuery(params object[] parameters)
         {
             Execute(parameters);
             return FetchQuery();
         }
 
-        private IEnumerable<MsiViewRecord> FetchQuery()
+        private IEnumerable<MsiRecord> FetchQuery()
         {
             var res = MsiResult.Success;
             while (res == MsiResult.Success)
@@ -146,7 +116,7 @@ namespace SharpMsi
 
                 if (res == MsiResult.Success)
                 {
-                    var recordObj = new MsiViewRecord(recordPtr);
+                    var recordObj = new MsiRecord(recordPtr);
                     _Records.Add(recordObj);
                     yield return recordObj;
                 }
@@ -161,7 +131,7 @@ namespace SharpMsi
 
         private void GetColumnsInfo()
         {
-            MsiViewRecord namesInfo = null, typesInfo = null;
+            MsiRecord namesInfo = null, typesInfo = null;
             try
             {
                 namesInfo = GetColumnsInfo(MSICOLINFO.Names);
@@ -187,7 +157,7 @@ namespace SharpMsi
             }
         }
 
-        private MsiViewRecord GetColumnsInfo(MSICOLINFO info)
+        private MsiRecord GetColumnsInfo(MSICOLINFO info)
         {
             var infoPtr = IntPtr.Zero;
             var res = (MsiResult)MsiAPI.MsiViewGetColumnInfo(Handle, (int)info, out infoPtr);
@@ -196,7 +166,7 @@ namespace SharpMsi
 
             try
             {
-                return new MsiViewRecord(infoPtr);
+                return new MsiRecord(infoPtr);
             }
             catch
             {

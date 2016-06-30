@@ -105,7 +105,7 @@ namespace SharpMsi.Native
             if (errorRecordPtr == IntPtr.Zero)
                 return _LastError;
 
-            MsiViewRecord errorRecord = null;
+            MsiRecord errorRecord = null;
 
             try
             {
@@ -123,7 +123,7 @@ namespace SharpMsi.Native
                 //    }
                 //}
 
-                errorRecord = new MsiViewRecord(errorRecordPtr);
+                errorRecord = new MsiRecord(errorRecordPtr);
 
                 var errorCode = errorRecord.GetInteger(1);
                 var errorMessage = GetErrorMessage(errorCode);

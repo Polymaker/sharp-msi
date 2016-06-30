@@ -63,7 +63,7 @@ namespace SharpMsi
             var res = (MsiResult)MsiAPI.MsiDatabaseGetPrimaryKeys(Database.Handle, Name, out pkInfoPtr);
             if (res != MsiResult.Success)
                 return new string[0];
-            var pkInfoRecord = new MsiViewRecord(pkInfoPtr);
+            var pkInfoRecord = new MsiRecord(pkInfoPtr);
             var colNames = new string[pkInfoRecord.FieldCount];
             for (int i = 0; i < pkInfoRecord.FieldCount; i++)
                 colNames[i] = pkInfoRecord.GetString(i + 1);

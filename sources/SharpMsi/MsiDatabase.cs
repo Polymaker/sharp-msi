@@ -93,10 +93,17 @@ namespace SharpMsi
             return MsiView.Open(this, query);
         }
 
-        public IEnumerable<MsiViewRecord> Query(string query)
+        public IEnumerable<MsiRecord> Query(string query)
         {
             var view = MsiView.Open(this, query);
             foreach (var record in view.ExecuteQuery())
+                yield return record;
+        }
+
+        public IEnumerable<MsiRecord> Query(string query, params object[] parameters)
+        {
+            var view = MsiView.Open(this, query);
+            foreach (var record in view.ExecuteQuery(parameters))
                 yield return record;
         }
 
@@ -125,7 +132,8 @@ namespace SharpMsi
 
         public override void Dispose()
         {
-            if (AccessMode == OpenDatabaseMode.CreateDirect || AccessMode == OpenDatabaseMode.Direct)
+            if (AccessMode == OpenDatabaseMode.CreateDirect || 
+                AccessMode == OpenDatabaseMode.Direct)
             {
                 MsiAPI.MsiDatabaseCommit(Handle);
             }

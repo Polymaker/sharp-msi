@@ -7,7 +7,7 @@ using SharpMsi.Native;
 
 namespace SharpMsi
 {
-    public class MsiViewRecord : MsiObject
+    public class MsiRecord : MsiObject
     {
         // Fields...
         private int _FieldCount;
@@ -17,7 +17,7 @@ namespace SharpMsi
             get { return _FieldCount; }
         }
 
-        internal MsiViewRecord(IntPtr handle)
+        internal MsiRecord(IntPtr handle)
             : base(handle)
         {
             _FieldCount = MsiAPI.MsiRecordGetFieldCount(Handle);
@@ -163,13 +163,12 @@ namespace SharpMsi
 
         #endregion
 
-
-        public static MsiViewRecord Create(int fieldCount)
+        public static MsiRecord Create(int fieldCount)
         {
-            return new MsiViewRecord(MsiAPI.MsiCreateRecord((uint)fieldCount));
+            return new MsiRecord(MsiAPI.MsiCreateRecord((uint)fieldCount));
         }
 
-        ~MsiViewRecord()
+        ~MsiRecord()
         {
             Dispose();
         }
