@@ -23,6 +23,7 @@ namespace SharpMsi
         BadQuerySyntax = 1615,
         InstallInProgress = 1618,
         FunctionFailed = 1627,
+        InvalidTable = 1628,
         CreateFailed = 1631
     }
 }

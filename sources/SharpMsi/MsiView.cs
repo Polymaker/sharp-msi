@@ -8,10 +8,10 @@ using SharpMsi.Native;
 
 namespace SharpMsi
 {
-    public class MsiView : MsiObject
+    public class MsiView : MsiObject, IMsiDbObject
     {
         // Fields...
-        private List<MsiRecord> _Records;
+        private List<MsiViewRecord> _Records;
         private readonly MsiDatabase _Database;
         private string _Query;
         private MsiColumnInfo[] _Columns;
@@ -40,7 +40,7 @@ namespace SharpMsi
             }
         }
 
-        public IList<MsiRecord> Records
+        public IList<MsiViewRecord> Records
         {
             get { return _Records.AsReadOnly(); }
         }
@@ -50,7 +50,7 @@ namespace SharpMsi
         {
             _Database = database;
             _Query = query;
-            _Records = new List<MsiRecord>();
+            _Records = new List<MsiViewRecord>();
             _Columns = new MsiColumnInfo[0];
         }
 
@@ -98,19 +98,19 @@ namespace SharpMsi
 
         #region Execute Query
 
-        public IEnumerable<MsiRecord> ExecuteQuery()
+        public IEnumerable<MsiViewRecord> ExecuteQuery()
         {
             Execute();
             return FetchQuery();
         }
 
-        public IEnumerable<MsiRecord> ExecuteQuery(params object[] parameters)
+        public IEnumerable<MsiViewRecord> ExecuteQuery(params object[] parameters)
         {
             Execute(parameters);
             return FetchQuery();
         }
 
-        private IEnumerable<MsiRecord> FetchQuery()
+        private IEnumerable<MsiViewRecord> FetchQuery()
         {
             var res = MsiResult.Success;
             while (res == MsiResult.Success)
@@ -120,7 +120,7 @@ namespace SharpMsi
 
                 if (res == MsiResult.Success)
                 {
-                    var recordObj = new MsiRecord(recordPtr);
+                    var recordObj = new MsiViewRecord(recordPtr, this);
                     _Records.Add(recordObj);
                     yield return recordObj;
                 }

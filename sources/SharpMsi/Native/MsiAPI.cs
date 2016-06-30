@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+using FILETIME = System.Runtime.InteropServices.ComTypes.FILETIME;
 
 namespace SharpMsi.Native
 {
@@ -21,6 +22,10 @@ namespace SharpMsi.Native
         public static extern uint MsiDatabaseGetPrimaryKeys(IntPtr hDatabase, string szTableName, out IntPtr phRecord);
 
         [DllImport("msi.dll", CharSet = CharSet.Unicode)]
+        //[return: MarshalAs(UnmanagedType.U1)]
+        public static extern MSICONDITION MsiDatabaseIsTablePersistent(IntPtr hDatabase, string szTableName);
+
+        [DllImport("msi.dll", CharSet = CharSet.Unicode)]
         public static extern int MsiDatabaseOpenView(IntPtr hDatabase, string szQuery, out IntPtr phView);
 
         [DllImport("msi.dll", SetLastError = true)]
@@ -37,6 +42,9 @@ namespace SharpMsi.Native
 
         [DllImport("msi.dll", ExactSpelling = true)]
         public static extern IntPtr MsiGetLastErrorRecord();
+
+        [DllImport("msi.dll", CharSet = CharSet.Unicode)]
+        public static extern uint MsiGetSummaryInformation(IntPtr hDatabse, string szDatabasePath, uint uiUpdateCount, out IntPtr phSummaryInfo);
 
         [DllImport("msi.dll", CharSet = CharSet.Unicode)]
         public static extern uint MsiOpenDatabase(string szDatabasePath, IntPtr phPersist, out IntPtr phDatabase);
@@ -61,19 +69,26 @@ namespace SharpMsi.Native
         public static extern uint MsiRecordReadStream(IntPtr hRecord, uint iField, [Out] byte[] szDataBuf, ref int pcbDataBuf);
 
         [DllImport("msi.dll", ExactSpelling = true)]
-        public static extern int MsiRecordSetInteger(IntPtr hRecord, uint iField, int iValue);
+        public static extern uint MsiRecordSetInteger(IntPtr hRecord, uint iField, int iValue);
 
         [DllImport("msi.dll", CharSet = CharSet.Unicode)]
-        public static extern int MsiRecordSetStream(IntPtr hRecord, uint iField, string szFilePath);
+        public static extern uint MsiRecordSetStream(IntPtr hRecord, uint iField, string szFilePath);
 
         [DllImport("msi.dll", CharSet = CharSet.Unicode)]
-        public static extern int MsiRecordSetString(IntPtr hRecord, uint iField, string szValue);
+        public static extern uint MsiRecordSetString(IntPtr hRecord, uint iField, string szValue);
 
         [DllImport("msi.dll")]
-        public static extern int MsiViewClose(IntPtr viewhandle);
+        public static extern uint MsiSummaryInfoPersist(IntPtr hSummaryInfo);
+
+        [DllImport("msi.dll")]
+        public static extern uint MsiSummaryInfoGetProperty(IntPtr hSummaryInfo, uint uiProperty,
+            out uint puiDataType, out int piValue, out FILETIME pftValue, [Out] StringBuilder szValueBuf, ref int pcchValueBuf);
+
+        [DllImport("msi.dll")]
+        public static extern uint MsiViewClose(IntPtr viewhandle);
 
         [DllImport("msi.dll", CharSet = CharSet.Unicode)]
-        public static extern int MsiViewExecute(IntPtr hView, IntPtr hRecord);
+        public static extern uint MsiViewExecute(IntPtr hView, IntPtr hRecord);
 
         [DllImport("msi.dll", CharSet = CharSet.Unicode)]
         public static extern uint MsiViewFetch(IntPtr hView, out IntPtr hRecord);

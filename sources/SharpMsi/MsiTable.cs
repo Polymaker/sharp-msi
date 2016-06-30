@@ -1,16 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using SharpMsi.Native;
 
 namespace SharpMsi
 {
-    public class MsiTable
+    [DebuggerDisplay("{Name}")]
+    public class MsiTable : IMsiDbObject
     {
         // Fields...
+        //private bool _IsTemporary;
         private readonly MsiDatabase _Database;
-        private string _Name;
+        private readonly string _Name;
         private MsiTableColumn[] _Columns;
 
         public MsiDatabase Database
@@ -23,12 +26,17 @@ namespace SharpMsi
             get { return _Name; }
         }
 
+        //public bool IsTemporary
+        //{
+        //    get { return _IsTemporary; }
+        //}
+
         public MsiTableColumn[] Columns
         {
             get 
             {
                 if (_Columns.Length == 0)
-                    LoadColumnsInfo();
+                    _Columns = GetTableColumns(Database, Name);
                 return _Columns; 
             }
         }
@@ -40,27 +48,40 @@ namespace SharpMsi
             _Columns = new MsiTableColumn[0];
         }
 
-        private void LoadColumnsInfo()
+        internal MsiTable(MsiDatabase database, string name, MsiTableColumn[] columns)
         {
+            _Database = database;
+            _Name = name;
+            _Columns = columns;
+        }
 
-            var pkColumnNames = GetPrimaryKeyColumnNames();
+        public IEnumerable<MsiViewRecord> Query()
+        {
+            return Database.Query(string.Format("SELECT * FROM `{0}`", Name));
+        }
 
-            using (var tmpView = Database.OpenView("SELECT * FROM " + Name))
+        internal static MsiTableColumn[] GetTableColumns(MsiDatabase database, string tablename)
+        {
+            var pkColumnNames = GetPrimaryKeys(database, tablename);
+            var columns = new MsiTableColumn[0];
+
+            using (var tmpView = database.OpenView(string.Format("SELECT * FROM `{0}`", tablename)))
             {
-                _Columns = new MsiTableColumn[tmpView.Columns.Length];
-                for (int i = 0; i < _Columns.Length; i++)
+                columns = new MsiTableColumn[tmpView.Columns.Length];
+                for (int i = 0; i < columns.Length; i++)
                 {
-                    _Columns[i] = new MsiTableColumn(
-                        tmpView.Columns[i], 
+                    columns[i] = new MsiTableColumn(
+                        tmpView.Columns[i],
                         pkColumnNames.Contains(tmpView.Columns[i].Name));
                 }
             }
+            return columns;
         }
 
-        private string[] GetPrimaryKeyColumnNames()
+        internal static string[] GetPrimaryKeys(MsiDatabase database, string tablename)
         {
             var pkInfoPtr = IntPtr.Zero;
-            var res = (MsiResult)MsiAPI.MsiDatabaseGetPrimaryKeys(Database.Handle, Name, out pkInfoPtr);
+            var res = (MsiResult)MsiAPI.MsiDatabaseGetPrimaryKeys(database.Handle, tablename, out pkInfoPtr);
             if (res != MsiResult.Success)
                 return new string[0];
             var pkInfoRecord = new MsiRecord(pkInfoPtr);

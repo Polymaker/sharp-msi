@@ -58,21 +58,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IMsiDbObject.cs" />
     <Compile Include="MsiColumnInfo.cs" />
     <Compile Include="MsiColumnType.cs" />
     <Compile Include="MsiDatabase.cs" />
+    <Compile Include="MsiDatabaseTables.cs" />
     <Compile Include="MsiError.cs" />
     <Compile Include="MsiException.cs" />
     <Compile Include="MsiObject.cs" />
     <Compile Include="MsiResult.cs" />
+    <Compile Include="MsiSummaryInformation.cs" />
     <Compile Include="MsiTable.cs" />
     <Compile Include="MsiTableColumn.cs" />
     <Compile Include="MsiView.cs" />
     <Compile Include="MsiRecord.cs" />
+    <Compile Include="MsiViewRecord.cs" />
     <Compile Include="Native\MsiAPI.cs" />
     <Compile Include="Native\MSICOLINFO.cs" />
+    <Compile Include="Native\MSICONDITION.cs" />
     <Compile Include="Native\MSIMODIFY.cs" />
     <Compile Include="Native\NativeUtils.cs" />
+    <Compile Include="Native\VARENUM.cs" />
     <Compile Include="OpenDatabaseMode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

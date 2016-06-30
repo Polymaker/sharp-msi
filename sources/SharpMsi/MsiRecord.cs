@@ -82,12 +82,12 @@ namespace SharpMsi
             return byteRead;
         }
 
-        public Stream GetStream(int fieldIndex)
+        public MemoryStream GetStream(int fieldIndex)
         {
             if (fieldIndex <= 0 || fieldIndex > FieldCount)
                 throw new IndexOutOfRangeException("fieldIndex");
 
-            byte[] buffer = new byte[256];
+            byte[] buffer = new byte[128];
             var ms = new MemoryStream();
             int byteRead = buffer.Length;
             do
@@ -97,7 +97,9 @@ namespace SharpMsi
                 if (!(res == MsiResult.Success || res == MsiResult.MoreData))
                     throw MsiAPI.GetMsiResultException(res);
                 ms.Write(buffer, 0, byteRead);
-                if (res == MsiResult.Success)
+                //if (res == MsiResult.Success)
+                //    break;
+                if (byteRead < buffer.Length)
                     break;
             }
             while (true);

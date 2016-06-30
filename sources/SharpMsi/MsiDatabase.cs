@@ -10,9 +10,9 @@ namespace SharpMsi
     public class MsiDatabase : MsiObject
     {
         // Fields...
+        private MsiSummaryInformation _Summary;
         private readonly OpenDatabaseMode _AccessMode;
         private readonly string _Filepath;
-        private Dictionary<string, string> _Properties;
         private List<MsiTable> _Tables;
 
         public string Filepath
@@ -20,9 +20,9 @@ namespace SharpMsi
             get { return _Filepath; }
         }
 
-        public Dictionary<string, string> Properties
+        public MsiSummaryInformation Summary
         {
-            get { return _Properties; }
+            get { return _Summary; }
         }
 
         public MsiTable[] Tables
@@ -45,19 +45,10 @@ namespace SharpMsi
         {
             _Filepath = path;
             _AccessMode = accessMode;
-            _Properties = new Dictionary<string, string>();
             _Tables = new List<MsiTable>();
-            LoadProperties();
-        }
-
-        public void LoadProperties()
-        {
-            _Properties.Clear();
-
-            foreach (var record in Query("SELECT * FROM Property"))
-            {
-                _Properties.Add(record.GetString(1), record.GetString(2));
-            }
+            IntPtr summaryPtr;
+            MsiAPI.MsiGetSummaryInformation(handle, null, 0, out summaryPtr);
+            _Summary = new MsiSummaryInformation(summaryPtr, 0);
         }
 
         private void GetTableList()
@@ -80,6 +71,10 @@ namespace SharpMsi
             return new MsiDatabase(msiHandle, filepath, mode);
         }
 
+        /// <summary>
+        /// Commits changes to a database.
+        /// </summary>
+        /// <returns></returns>
         public bool Commit()
         {
             var res = (MsiResult)MsiAPI.MsiDatabaseCommit(Handle);
@@ -93,14 +88,14 @@ namespace SharpMsi
             return MsiView.Open(this, query);
         }
 
-        public IEnumerable<MsiRecord> Query(string query)
+        public IEnumerable<MsiViewRecord> Query(string query)
         {
             var view = MsiView.Open(this, query);
             foreach (var record in view.ExecuteQuery())
                 yield return record;
         }
 
-        public IEnumerable<MsiRecord> Query(string query, params object[] parameters)
+        public IEnumerable<MsiViewRecord> Query(string query, params object[] parameters)
         {
             var view = MsiView.Open(this, query);
             foreach (var record in view.ExecuteQuery(parameters))
@@ -124,6 +119,16 @@ namespace SharpMsi
         }
 
         #endregion
+
+        public MsiTable GetTableInfo(MsiDatabaseTables table)
+        {
+            string tableName = table.ToString();
+            if (Tables.Any(t => t.Name == tableName))
+                return Tables.First(t => t.Name == tableName);
+            var tableInfo = new MsiTable(this, tableName);
+
+            return tableInfo;
+        }
 
         ~MsiDatabase()
         {

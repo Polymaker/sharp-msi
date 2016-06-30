@@ -7,7 +7,7 @@ namespace SharpMsi
 {
     public class MsiTableColumn : MsiColumnInfo
     {
-        private bool _IsPrimaryKey;
+        private readonly bool _IsPrimaryKey;
 
         public bool IsPrimaryKey
         {
