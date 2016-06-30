@@ -69,6 +69,12 @@
     <Compile Include="MsiTableColumn.cs" />
     <Compile Include="MsiView.cs" />
     <Compile Include="MsiRecord.cs" />
+    <Compile Include="Native\CabinetAPI.cs" />
+    <Compile Include="Native\MSCAB\CFDATA.cs" />
+    <Compile Include="Native\MSCAB\CFFILE.cs" />
+    <Compile Include="Native\MSCAB\CFFOLDER.cs" />
+    <Compile Include="Native\MSCAB\CFHDR.cs" />
+    <Compile Include="Native\MSCAB\CFHEADER.cs" />
     <Compile Include="Native\MsiAPI.cs" />
     <Compile Include="Native\MSICOLINFO.cs" />
     <Compile Include="Native\MSIMODIFY.cs" />
@@ -78,6 +84,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MsiErrors.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="MSCAB\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
