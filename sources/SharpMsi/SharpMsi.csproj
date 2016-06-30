@@ -68,7 +68,7 @@
     <Compile Include="MsiTable.cs" />
     <Compile Include="MsiTableColumn.cs" />
     <Compile Include="MsiView.cs" />
-    <Compile Include="MsiViewRecord.cs" />
+    <Compile Include="MsiRecord.cs" />
     <Compile Include="Native\MsiAPI.cs" />
     <Compile Include="Native\MSICOLINFO.cs" />
     <Compile Include="Native\MSIMODIFY.cs" />
