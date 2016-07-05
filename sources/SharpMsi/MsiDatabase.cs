@@ -137,6 +137,11 @@ namespace SharpMsi
 
         public override void Dispose()
         {
+            if (_Summary != null)
+            {
+                _Summary.Dispose();
+                _Summary = null;
+            }
             if (AccessMode == OpenDatabaseMode.CreateDirect || 
                 AccessMode == OpenDatabaseMode.Direct)
             {

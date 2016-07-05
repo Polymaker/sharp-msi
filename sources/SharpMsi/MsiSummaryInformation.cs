@@ -10,10 +10,36 @@ namespace SharpMsi
     {
         public const uint PID_CODEPAGE = 1;
         public const uint PID_TITLE = 2;
+        public const uint PID_SUBJECT = 3;
+        public const uint PID_AUTHOR = 4;
+        public const uint PID_KEYWORDS = 5;
+        public const uint PID_COMMENTS = 6;
+        public const uint PID_TEMPLATE = 7;
+        public const uint PID_LASTAUTHOR = 8;
+        public const uint PID_REVNUMBER = 9;
+        public const uint PID_LASTPRINTED = 11;
+        public const uint PID_CREATE_DTM = 12;
+        public const uint PID_LASTSAVE_DTM = 13;
+        public const uint PID_PAGECOUNT = 14;
+        public const uint PID_WORDCOUNT = 15;
+        public const uint PID_CHARCOUNT = 16;
+        public const uint PID_APPNAME = 18;
+        public const uint PID_SECURITY = 19;
 
         // Fields...
         private readonly uint _UpdateCount;
 
+        public int CodePage
+        {
+            get
+            {
+                return Convert.ToInt32(GetProperty(PID_CODEPAGE));
+            }
+        }
+
+        /// <summary>
+        /// A description of this file as an installation package. The description should include the phrase "Installation Database." <see cref="MSDN"/>
+        /// </summary>
         public string Title
         {
             get
@@ -22,6 +48,42 @@ namespace SharpMsi
             }
         }
 
+        /// <summary>
+        /// The name of the product installed by this package. This should be the same name as in the ProductName property. <see cref="MSDN"/>
+        /// </summary>
+        public string Subject
+        {
+            get
+            {
+                return Convert.ToString(GetProperty(PID_SUBJECT));
+            }
+        }
+
+        /// <summary>
+        /// The name of the manufacturer of this product. This should be the same name as in the Manufacturer property. <see cref="MSDN"/>
+        /// </summary>
+        public string Author
+        {
+            get
+            {
+                return Convert.ToString(GetProperty(PID_AUTHOR));
+            }
+        }
+
+        /// <summary>
+        /// The time and date when this installer database was created.
+        /// </summary>
+        public DateTime CreateTime
+        {
+            get
+            {
+                return Convert.ToDateTime(GetProperty(PID_CREATE_DTM));
+            }
+        }
+
+        /// <summary>
+        /// Specifies the maximum number of updated values.
+        /// </summary>
         public uint UpdateCount
         {
             get { return _UpdateCount; }
