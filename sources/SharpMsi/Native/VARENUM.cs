@@ -9,7 +9,13 @@ namespace SharpMsi.Native
     {
         VT_EMPTY = 0,
         VT_NULL = 1,
+        /// <summary>
+        /// A 2-byte signed integer.
+        /// </summary>
         VT_I2 = 2,
+        /// <summary>
+        /// A 4-byte signed integer.
+        /// </summary>
         VT_I4 = 3,
         VT_R4 = 4,
         VT_R8 = 5,
@@ -36,6 +42,9 @@ namespace SharpMsi.Native
         VT_SAFEARRAY = 27,
         VT_CARRAY = 28,
         VT_USERDEFINED = 29,
+        /// <summary>
+        /// A single byte, null-terminated ANSI character string.
+        /// </summary>
         VT_LPSTR = 30,
         VT_LPWSTR = 31,
         VT_RECORD = 36,

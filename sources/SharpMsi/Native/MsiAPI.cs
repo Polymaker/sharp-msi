@@ -85,11 +85,19 @@ namespace SharpMsi.Native
             out uint puiDataType, out int piValue, out FILETIME pftValue, [Out] StringBuilder szValueBuf, ref int pcchValueBuf);
 
         [DllImport("msi.dll")]
-        public static extern uint MsiViewClose(IntPtr viewhandle);
+        public static extern uint MsiSummaryInfoGetPropertyCount(IntPtr hSummaryInfo, out uint puiPropertyCount);
+
+        [DllImport("msi.dll")]
+
+        public static extern uint MsiSummaryInfoSetProperty(IntPtr hSummaryInfo, uint uiProperty,
+            uint puiDataType, int piValue, FILETIME pftValue, string szValue);
+
+        [DllImport("msi.dll")]
+        public static extern uint MsiViewClose(IntPtr viewhandle); 
 
         [DllImport("msi.dll", CharSet = CharSet.Unicode)]
         public static extern uint MsiViewExecute(IntPtr hView, IntPtr hRecord);
-
+        
         [DllImport("msi.dll", CharSet = CharSet.Unicode)]
         public static extern uint MsiViewFetch(IntPtr hView, out IntPtr hRecord);
 

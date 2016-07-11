@@ -21,6 +21,13 @@ namespace SharpMsi.Test
             }
 
             var msiInstaller = MsiDatabase.Open(msiFiles[0], OpenDatabaseMode.Direct);
+            Trace.WriteLine(msiInstaller.Summary.Subject);
+            Trace.WriteLine(msiInstaller.Summary.Author);
+            msiInstaller.Summary.Author = "Hello";
+            msiInstaller.Summary.Subject = "World";
+            msiInstaller.Summary.Commit();
+            Trace.WriteLine(msiInstaller.Summary.Subject);
+            Trace.WriteLine(msiInstaller.Summary.Author);
             //var propVal = msiInstaller.Summary.GetProperty(13);
             //var testTable = msiInstaller.GetTableInfo(MsiDatabaseTables._Streams);
             //var records = testTable.Query().ToList();

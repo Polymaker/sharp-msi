@@ -40,15 +40,19 @@ namespace SharpMsi
             get { return _AccessMode; }
         }
 
+        public bool ReadOnly
+        {
+            get { return AccessMode == OpenDatabaseMode.ReadOnly; }
+        }
+
         private MsiDatabase(IntPtr handle, string path, OpenDatabaseMode accessMode)
             : base(handle)
         {
             _Filepath = path;
             _AccessMode = accessMode;
             _Tables = new List<MsiTable>();
-            IntPtr summaryPtr;
-            MsiAPI.MsiGetSummaryInformation(handle, null, 0, out summaryPtr);
-            _Summary = new MsiSummaryInformation(summaryPtr, 0);
+            _Summary = MsiSummaryInformation.GetSummaryInformation(this);
+            //_Summary = MsiSummaryInformation.GetSummaryInformation(this, ReadOnly ? 0u : 1u);
         }
 
         private void GetTableList()
@@ -142,11 +146,13 @@ namespace SharpMsi
                 _Summary.Dispose();
                 _Summary = null;
             }
-            if (AccessMode == OpenDatabaseMode.CreateDirect || 
-                AccessMode == OpenDatabaseMode.Direct)
-            {
+
+            //MSDN:
+            //Always call MsiDatabaseCommit on a database that has been opened in direct mode (MSIDBOPEN_DIRECT or MSIDBOPEN_CREATEDIRECT) before closing the database's handle. 
+            //Failure to do this may corrupt the database.
+            if (AccessMode == OpenDatabaseMode.CreateDirect || AccessMode == OpenDatabaseMode.Direct)
                 MsiAPI.MsiDatabaseCommit(Handle);
-            }
+
             base.Dispose();
         }
     }

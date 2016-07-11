@@ -6,7 +6,7 @@ using SharpMsi.Native;
 
 namespace SharpMsi
 {
-    public class MsiSummaryInformation : MsiObject
+    public class MsiSummaryInformation : MsiObject, IMsiDbObject
     {
         public const uint PID_CODEPAGE = 1;
         public const uint PID_TITLE = 2;
@@ -28,12 +28,16 @@ namespace SharpMsi
 
         // Fields...
         private readonly uint _UpdateCount;
+        private readonly MsiDatabase _Database;
 
-        public int CodePage
+        /// <summary>
+        /// The numeric value of the ANSI code page used to display the Summary Information. This property must be set before any string properties are set in the summary information.
+        /// </summary>
+        public short CodePage
         {
             get
             {
-                return Convert.ToInt32(GetProperty(PID_CODEPAGE));
+                return Convert.ToInt16(GetProperty(PID_CODEPAGE));
             }
         }
 
@@ -57,6 +61,10 @@ namespace SharpMsi
             {
                 return Convert.ToString(GetProperty(PID_SUBJECT));
             }
+            set
+            {
+                SetProperty(PID_SUBJECT, value);
+            }
         }
 
         /// <summary>
@@ -67,6 +75,21 @@ namespace SharpMsi
             get
             {
                 return Convert.ToString(GetProperty(PID_AUTHOR));
+            }
+            set
+            {
+                SetProperty(PID_AUTHOR, value);
+            }
+        }
+
+        /// <summary>
+        /// A list of keywords that may be used by file browsers to do keyword searches for a file. The keywords should include "Installer" as well as product-specific keywords.
+        /// </summary>
+        public string Keywords
+        {
+            get
+            {
+                return Convert.ToString(GetProperty(PID_KEYWORDS));
             }
         }
 
@@ -89,9 +112,15 @@ namespace SharpMsi
             get { return _UpdateCount; }
         }
 
-        public MsiSummaryInformation(IntPtr handle, uint updateCount)
+        public MsiDatabase Database
+        {
+            get { return _Database; }
+        }
+
+        public MsiSummaryInformation(IntPtr handle, MsiDatabase database, uint updateCount)
             : base(handle)
         {
+            _Database = database;
             _UpdateCount = updateCount;
         }
 
@@ -151,6 +180,93 @@ namespace SharpMsi
 
         #endregion
 
+        #region Set property value
+
+        private void SetProperty(uint pid, object value)
+        {
+            var valueType = value.GetType();
+            uint dataType = 0;
+
+            int intValue = 0;
+            string stringValue = null;
+            var timeValue = default(System.Runtime.InteropServices.ComTypes.FILETIME);
+
+            if (valueType == typeof(short))
+            {
+                intValue = (short)value;
+                dataType = (uint)VARENUM.VT_I2;
+            }
+            else if (valueType == typeof(int))
+            {
+                intValue = (int)value;
+                dataType = (uint)VARENUM.VT_I4;
+            }
+            else if (valueType == typeof(string))
+            {
+                stringValue = (string)value;
+                dataType = (uint)VARENUM.VT_LPSTR;
+            }
+            else if (valueType == typeof(DateTime))
+            {
+                timeValue = ((DateTime)value).DateTimeToFiletime();
+                dataType = (uint)VARENUM.VT_FILETIME;
+            }
+
+            var res = (MsiResult)MsiAPI.MsiSummaryInfoSetProperty(Handle, pid, dataType, intValue, timeValue, stringValue);
+            if (res != MsiResult.Success)
+                throw MsiAPI.GetMsiResultException(res);
+        }
+
+        #endregion
+
+        public void Commit()
+        {
+            MsiAPI.MsiSummaryInfoPersist(Handle);
+            //after commiting, MsiSummaryInfoGetProperty always return VT_EMPTY and MsiSummaryInfoSetProperty returns ERROR_FUNCTION_FAILED
+            //so we reload the summary
+            RecreateHandle();
+        }
+
+        private void RecreateHandle()
+        {
+            if(Handle != IntPtr.Zero)
+                MsiAPI.MsiCloseHandle(Handle);
+
+            IntPtr summaryPtr;
+            MsiAPI.MsiGetSummaryInformation(Database.Handle, null, UpdateCount, out summaryPtr);
+            Handle = summaryPtr;
+        }
+
+        public static MsiSummaryInformation GetSummaryInformation(MsiDatabase database)
+        {
+            IntPtr summaryPtr;
+            var res = (MsiResult)MsiAPI.MsiGetSummaryInformation(database.Handle, null, 0, out summaryPtr);
+            if (res == MsiResult.Success && summaryPtr != IntPtr.Zero)
+            {
+                var updateCount = 0u;
+                if (!database.ReadOnly)
+                {
+                    //set the update count to the number of properties. I don't know what is the purpose of limiting the number of updates.
+                    //We could also just put a large number.
+                    MsiAPI.MsiSummaryInfoGetPropertyCount(summaryPtr, out updateCount);
+                    var sumInfo = new MsiSummaryInformation(summaryPtr, database, updateCount);
+                    sumInfo.RecreateHandle();//recreate summary handle with obtained updateCount value
+                    return sumInfo;
+                }
+                return new MsiSummaryInformation(summaryPtr, database, updateCount);
+            }
+            return null;
+        }
+
+        public static MsiSummaryInformation GetSummaryInformation(MsiDatabase database, uint updateCount)
+        {
+            IntPtr summaryPtr;
+            var res = (MsiResult)MsiAPI.MsiGetSummaryInformation(database.Handle, null, updateCount, out summaryPtr);
+            if (res == MsiResult.Success && summaryPtr != IntPtr.Zero)
+                return new MsiSummaryInformation(summaryPtr, database, updateCount);
+            return null;
+        }
+
         ~MsiSummaryInformation()
         {
             Dispose();
@@ -158,6 +274,9 @@ namespace SharpMsi
 
         public override void Dispose()
         {
+            //MSDN:
+            //If a value of uiUpdateCount greater than 0 is used to open an existing summary information stream, MsiSummaryInfoPersist must be called before closing the phSummaryInfo handle. 
+            //Failing to do this will lose the existing stream information.
             if (UpdateCount > 0 && Handle != IntPtr.Zero)
             {
                 MsiAPI.MsiSummaryInfoPersist(Handle);
