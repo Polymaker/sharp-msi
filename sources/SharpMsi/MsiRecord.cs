@@ -23,6 +23,11 @@ namespace SharpMsi
             _FieldCount = MsiAPI.MsiRecordGetFieldCount(Handle);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="fieldIndex">Index of the field. Start at 1 (not 0 like the programming convention).</param>
+        /// <returns></returns>
         public int GetFieldSize(int fieldIndex)
         {
             if (fieldIndex <= 0 || fieldIndex > FieldCount)
@@ -30,6 +35,11 @@ namespace SharpMsi
             return MsiAPI.MsiRecordDataSize(Handle, (uint)fieldIndex);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="fieldIndex">Index of the field. Start at 1 (not 0 like the programming convention).</param>
+        /// <returns></returns>
         public bool IsNull(int fieldIndex)
         {
             if (fieldIndex <= 0 || fieldIndex > FieldCount)
@@ -39,6 +49,11 @@ namespace SharpMsi
 
         #region Get values
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="fieldIndex">Index of the field. Start at 1 (not 0 like the programming convention).</param>
+        /// <returns></returns>
         public int GetInteger(int fieldIndex)
         {
             if (fieldIndex <= 0 || fieldIndex > FieldCount)
@@ -47,6 +62,11 @@ namespace SharpMsi
             return MsiAPI.MsiRecordGetInteger(Handle, (uint)fieldIndex);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="fieldIndex">Index of the field. Start at 1 (not 0 like the programming convention).</param>
+        /// <returns></returns>
         public string GetString(int fieldIndex)
         {
             if (fieldIndex <= 0 || fieldIndex > FieldCount)
@@ -55,6 +75,12 @@ namespace SharpMsi
             return GetString(fieldIndex, GetFieldSize(fieldIndex));
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="fieldIndex">Index of the field. Start at 1 (not 0 like the programming convention).</param>
+        /// <param name="length"></param>
+        /// <returns></returns>
         public string GetString(int fieldIndex, int length)
         {
             if (fieldIndex <= 0 || fieldIndex > FieldCount)
@@ -70,6 +96,13 @@ namespace SharpMsi
             return builder.ToString();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="fieldIndex">Index of the field. Start at 1 (not 0 like the programming convention).</param>
+        /// <param name="buffer"></param>
+        /// <param name="length"></param>
+        /// <returns></returns>
         public int ReadStream(int fieldIndex, byte[] buffer, int length)
         {
             if (fieldIndex <= 0 || fieldIndex > FieldCount)
@@ -82,6 +115,11 @@ namespace SharpMsi
             return byteRead;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="fieldIndex">Index of the field. Start at 1 (not 0 like the programming convention).</param>
+        /// <returns></returns>
         public MemoryStream GetStream(int fieldIndex)
         {
             if (fieldIndex <= 0 || fieldIndex > FieldCount)
@@ -111,6 +149,11 @@ namespace SharpMsi
 
         #region Set values
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="fieldIndex">Index of the field. Start at 1 (not 0 like the programming convention).</param>
+        /// <param name="value"></param>
         public void SetInteger(int fieldIndex, int value)
         {
             if (fieldIndex <= 0 || fieldIndex > FieldCount)
@@ -118,6 +161,11 @@ namespace SharpMsi
             MsiAPI.MsiRecordSetInteger(Handle, (uint)fieldIndex, value);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="fieldIndex">Index of the field. Start at 1 (not 0 like the programming convention).</param>
+        /// <param name="value"></param>
         public void SetString(int fieldIndex, string value)
         {
             if (fieldIndex <= 0 || fieldIndex > FieldCount)
@@ -125,6 +173,11 @@ namespace SharpMsi
             MsiAPI.MsiRecordSetString(Handle, (uint)fieldIndex, value);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="fieldIndex">Index of the field. Start at 1 (not 0 like the programming convention).</param>
+        /// <param name="value"></param>
         public void SetStream(int fieldIndex, Stream value)
         {
             if (fieldIndex <= 0 || fieldIndex > FieldCount)
@@ -140,6 +193,11 @@ namespace SharpMsi
             File.Delete(tmpFilepath);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="fieldIndex">Index of the field. Start at 1 (not 0 like the programming convention).</param>
+        /// <param name="value"></param>
         public void SetValue(int fieldIndex, object value)
         {
             var valueType = value.GetType();

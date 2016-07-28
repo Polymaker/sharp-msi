@@ -5,12 +5,15 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using SharpMsi.Native;
+using System.Text.RegularExpressions;
 
 namespace SharpMsi
 {
     public class MsiView : MsiObject, IMsiDbObject
     {
         // Fields...
+        private MsiViewType _ViewType;
+        private string[] _Tables;
         private List<MsiViewRecord> _Records;
         private readonly MsiDatabase _Database;
         private string _Query;
@@ -25,6 +28,16 @@ namespace SharpMsi
         public string Query
         {
             get { return _Query; }
+        }
+
+        public MsiViewType ViewType
+        {
+            get { return _ViewType; }
+        }
+
+        public string[] Tables
+        {
+            get { return _Tables; }
         }
 
         public MsiColumnInfo[] Columns
@@ -52,6 +65,69 @@ namespace SharpMsi
             _Query = query;
             _Records = new List<MsiViewRecord>();
             _Columns = new MsiColumnInfo[0];
+            _Tables = new string[0];
+            _ViewType = MsiViewType.Query;
+            ParseViewTypeAndTables();
+        }
+
+        private void ParseViewTypeAndTables()
+        {
+            var cleanQuery = Regex.Replace(Query.Trim(), @"\s?([\(\)\,\*]|<=|>=|>|<|=)\s?", " $1 ");
+            string[] words = cleanQuery.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+
+            _ViewType = ParseViewType(words[0]);
+
+            int curIndex = 1;
+
+            if (ViewType != MsiViewType.Update)
+            {
+                for (; curIndex < words.Length; curIndex++)
+                {
+                    if (words[curIndex].Equals("into", StringComparison.OrdinalIgnoreCase) ||
+                        words[curIndex].Equals("from", StringComparison.OrdinalIgnoreCase) ||
+                        words[curIndex].Equals("table", StringComparison.OrdinalIgnoreCase))
+                    {
+                        curIndex++;
+                        break;
+                    }
+                }
+            }
+
+            var tables = new List<string>();
+            bool foundTable = true;
+            for (; curIndex < words.Length; curIndex++)
+            {
+                if (foundTable)
+                {
+                    tables.Add(words[curIndex].Trim('`'));
+                    foundTable = false;
+                }
+                else if (words[curIndex] == ",")
+                    foundTable = true;
+                else
+                    break;
+            }
+            _Tables = tables.ToArray();
+        }
+
+        private static MsiViewType ParseViewType(string sql)
+        {
+            if (sql.Equals("select", StringComparison.OrdinalIgnoreCase))
+                return MsiViewType.Query;
+            else if (sql.Equals("insert", StringComparison.OrdinalIgnoreCase))
+                return MsiViewType.Insert;
+            else if (sql.Equals("update", StringComparison.OrdinalIgnoreCase))
+                return MsiViewType.Update;
+            else if (sql.Equals("delete", StringComparison.OrdinalIgnoreCase))
+                return MsiViewType.Delete;
+            else if (sql.Equals("create", StringComparison.OrdinalIgnoreCase))
+                return MsiViewType.Create;
+            else if (sql.Equals("drop", StringComparison.OrdinalIgnoreCase))
+                return MsiViewType.Drop;
+            else if (sql.Equals("alter", StringComparison.OrdinalIgnoreCase))
+                return MsiViewType.Alter;
+
+            return (MsiViewType)(-1);
         }
 
         public static MsiView Open(MsiDatabase database, string query)

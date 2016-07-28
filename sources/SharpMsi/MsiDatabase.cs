@@ -81,6 +81,9 @@ namespace SharpMsi
         /// <returns></returns>
         public bool Commit()
         {
+            if (IsDisposed && Handle == IntPtr.Zero)
+                return false;
+
             var res = (MsiResult)MsiAPI.MsiDatabaseCommit(Handle);
             return res == MsiResult.Success;
         }
@@ -89,11 +92,17 @@ namespace SharpMsi
 
         public MsiView OpenView(string query)
         {
+            if (IsDisposed)
+                return null;
+
             return MsiView.Open(this, query);
         }
 
         public IEnumerable<MsiViewRecord> Query(string query)
         {
+            if (IsDisposed)
+                yield break;
+
             var view = MsiView.Open(this, query);
             foreach (var record in view.ExecuteQuery())
                 yield return record;
@@ -101,6 +110,9 @@ namespace SharpMsi
 
         public IEnumerable<MsiViewRecord> Query(string query, params object[] parameters)
         {
+            if (IsDisposed)
+                yield break;
+
             var view = MsiView.Open(this, query);
             foreach (var record in view.ExecuteQuery(parameters))
                 yield return record;
@@ -108,6 +120,8 @@ namespace SharpMsi
 
         public void ExecuteNonQuery(string query)
         {
+            if (IsDisposed)
+                return;
             using (var view = OpenView(query))
             {
                 view.Execute();
@@ -116,6 +130,9 @@ namespace SharpMsi
 
         public void ExecuteNonQuery(string query, params object[] parameters)
         {
+            if (IsDisposed)
+                return;
+
             using (var view = OpenView(query))
             {
                 view.Execute(parameters);
@@ -126,12 +143,20 @@ namespace SharpMsi
 
         public MsiTable GetTableInfo(MsiDatabaseTables table)
         {
+            if (IsDisposed)
+                return null;
+
             string tableName = table.ToString();
             if (Tables.Any(t => t.Name == tableName))
                 return Tables.First(t => t.Name == tableName);
             var tableInfo = new MsiTable(this, tableName);
 
             return tableInfo;
+        }
+
+        public void Close()
+        {
+            Dispose();
         }
 
         ~MsiDatabase()

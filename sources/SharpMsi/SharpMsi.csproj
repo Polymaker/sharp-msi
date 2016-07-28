@@ -73,6 +73,7 @@
     <Compile Include="MsiView.cs" />
     <Compile Include="MsiRecord.cs" />
     <Compile Include="MsiViewRecord.cs" />
+    <Compile Include="MsiViewType.cs" />
     <Compile Include="Native\MsiAPI.cs" />
     <Compile Include="Native\MSICOLINFO.cs" />
     <Compile Include="Native\MSICONDITION.cs" />
@@ -81,10 +82,12 @@
     <Compile Include="Native\VARENUM.cs" />
     <Compile Include="OpenDatabaseMode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utilities\ExtensionMethods.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MsiErrors.xml" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
