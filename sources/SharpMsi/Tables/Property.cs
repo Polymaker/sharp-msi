@@ -6,7 +6,7 @@ using System.Text;
 namespace SharpMsi.Tables
 {
     [MsiTable("Property")]
-    public class Property : TableRecord
+    public sealed class Property : TableRecord
     {
         // Fields...
         private string _Value;

@@ -82,6 +82,10 @@
     <Compile Include="Native\VARENUM.cs" />
     <Compile Include="OpenDatabaseMode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tables\MsiColumnAttribute.cs" />
+    <Compile Include="Tables\MsiTableAttribute.cs" />
+    <Compile Include="Tables\Property.cs" />
+    <Compile Include="Tables\TableRecord.cs" />
     <Compile Include="Utilities\ExtensionMethods.cs" />
   </ItemGroup>
   <ItemGroup>
